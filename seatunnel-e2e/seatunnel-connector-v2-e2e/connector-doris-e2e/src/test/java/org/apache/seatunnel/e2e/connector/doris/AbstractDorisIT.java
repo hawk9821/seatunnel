@@ -26,6 +26,7 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.lifecycle.Startables;
 import org.testcontainers.utility.DockerLoggerFactory;
+import org.testcontainers.utility.MountableFile;
 
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +56,9 @@ public abstract class AbstractDorisIT extends TestSuiteBase implements TestResou
     protected static final int QUERY_PORT = 9030;
     protected static final int HTTP_PORT = 8030;
     protected static final int BE_HTTP_PORT = 8040;
-    protected static final String URL = "jdbc:mysql://%s:" + QUERY_PORT;
+    protected static final int FE_ARROW_FLIGHT_SQL_PORT = 9090;
+    protected static final int BE_ARROW_FLIGHT_SQL_PORT = 9091;
+    protected static final String CONNECT_URL = "jdbc:mysql://%s:" + QUERY_PORT;
     protected static final String USERNAME = "root";
     protected static final String PASSWORD = "";
     protected Connection jdbcConnection;
@@ -73,11 +76,19 @@ public abstract class AbstractDorisIT extends TestSuiteBase implements TestResou
 
     @BeforeAll
     @Override
-    public void startUp() {
+    public void startUp() throws InterruptedException {
         container =
                 new GenericContainer<>(DOCKER_IMAGE)
                         .withNetwork(NETWORK)
                         .withNetworkAliases(HOST)
+                        // enable doris the arrow flight sql @see
+                        // https://doris.apache.org/docs/dev/db-connect/arrow-flight-sql-connect/#connect-to-doris
+                        .withCopyFileToContainer(
+                                MountableFile.forClasspathResource("docker/doris-conf/fe.conf"),
+                                "/opt/apache-doris/fe/conf/")
+                        .withCopyFileToContainer(
+                                MountableFile.forClasspathResource("docker/doris-conf/be.conf"),
+                                "/opt/apache-doris/be/conf/")
                         .withPrivilegedMode(true)
                         .withLogConsumer(
                                 new Slf4jLogConsumer(DockerLoggerFactory.getLogger(DOCKER_IMAGE)));
@@ -85,9 +96,14 @@ public abstract class AbstractDorisIT extends TestSuiteBase implements TestResou
                 Lists.newArrayList(
                         String.format("%s:%s", QUERY_PORT, QUERY_PORT),
                         String.format("%s:%s", HTTP_PORT, HTTP_PORT),
-                        String.format("%s:%s", BE_HTTP_PORT, BE_HTTP_PORT)));
+                        String.format("%s:%s", BE_HTTP_PORT, BE_HTTP_PORT),
+                        String.format("%s:%s", FE_ARROW_FLIGHT_SQL_PORT, FE_ARROW_FLIGHT_SQL_PORT),
+                        String.format(
+                                "%s:%s", BE_ARROW_FLIGHT_SQL_PORT, BE_ARROW_FLIGHT_SQL_PORT)));
+
         Startables.deepStart(Stream.of(container)).join();
         log.info("doris container started");
+        TimeUnit.SECONDS.sleep(30);
         given().ignoreExceptions()
                 .await()
                 .atMost(360, TimeUnit.SECONDS)
@@ -104,7 +120,7 @@ public abstract class AbstractDorisIT extends TestSuiteBase implements TestResou
         Properties props = new Properties();
         props.put("user", USERNAME);
         props.put("password", PASSWORD);
-        jdbcConnection = driver.connect(String.format(URL, container.getHost()), props);
+        jdbcConnection = driver.connect(String.format(CONNECT_URL, container.getHost()), props);
         initializeBE();
         try (Statement statement = jdbcConnection.createStatement()) {
             statement.execute(SET_SQL);

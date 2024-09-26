@@ -22,22 +22,17 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>seatunnel-arrow-5.0</artifactId>
-    <name>SeaTunnel : Shade : Arrow5.0</name>
+    <artifactId>seatunnel-arrow</artifactId>
+    <name>SeaTunnel : Shade : Arrow</name>
 
     <properties>
-        <arrow.version>5.0.0</arrow.version>
+        <arrow.version>15.0.0</arrow.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.arrow</groupId>
-            <artifactId>arrow-vector</artifactId>
-            <version>${arrow.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.arrow</groupId>
-            <artifactId>arrow-memory-netty</artifactId>
+            <artifactId>flight-sql-jdbc-core</artifactId>
             <version>${arrow.version}</version>
             <exclusions>
                 <exclusion>
@@ -56,12 +51,21 @@
                     <groupId>io.netty</groupId>
                     <artifactId>netty-common</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.calcite.avatica</groupId>
+                    <artifactId>avatica</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-common</artifactId>
             <version>4.1.77.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.calcite.avatica</groupId>
+            <artifactId>avatica</artifactId>
+            <version>1.22.0</version>
         </dependency>
     </dependencies>
 
@@ -77,7 +81,7 @@
                         </goals>
                         <phase>package</phase>
                         <configuration>
-                            <finalName>seatunnel-arrow-5.0</finalName>
+                            <finalName>seatunnel-arrow</finalName>
                             <createSourcesJar>true</createSourcesJar>
                             <shadeSourcesContent>true</shadeSourcesContent>
                             <shadedArtifactAttached>false</shadedArtifactAttached>
@@ -123,7 +127,7 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>${basedir}/target/seatunnel-arrow-5.0.jar</file>
+                                    <file>${basedir}/target/seatunnel-arrow.jar</file>
                                     <type>jar</type>
                                     <classifier>optional</classifier>
                                 </artifact>

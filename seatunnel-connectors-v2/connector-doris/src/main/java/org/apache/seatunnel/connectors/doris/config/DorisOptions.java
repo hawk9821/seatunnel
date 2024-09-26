@@ -149,6 +149,12 @@ public interface DorisOptions {
                     .defaultValue(DORIS_EXEC_MEM_LIMIT_DEFAULT)
                     .withDescription("");
 
+    Option<Boolean> DORIS_USE_ARROW_FLIGHT_SQL =
+            Options.key("doris.use.arrow-flight-sql")
+                    .booleanType()
+                    .defaultValue(false)
+                    .withDescription("");
+
     // sink config options
     Option<Boolean> SINK_ENABLE_2PC =
             Options.key("sink.enable-2pc")

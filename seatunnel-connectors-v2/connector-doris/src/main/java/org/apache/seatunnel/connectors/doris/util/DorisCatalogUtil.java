@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -80,8 +81,24 @@ public class DorisCatalogUtil {
         return list.get(0).split(":")[0];
     }
 
-    public static String getJdbcUrl(String host, Integer port, String database) {
-        return String.format("jdbc:mysql://%s:%d/%s", host, port, database);
+    public static String getJdbcUrl(
+            String host,
+            Integer port,
+            String database,
+            boolean useArrowFlight,
+            Map<String, String> urlParams) {
+        String baseUrl =
+                useArrowFlight
+                        ? String.format(
+                                "jdbc:arrow-flight-sql://%s:%d/%s?useEncryption=false",
+                                host, port, database)
+                        : String.format("jdbc:mysql://%s:%d/%s", host, port, database);
+        if (urlParams == null || urlParams.isEmpty()) {
+            return baseUrl;
+        }
+        StringJoiner paramJoiner = new StringJoiner("&", useArrowFlight ? "&" : "?", "");
+        urlParams.forEach((key, value) -> paramJoiner.add(key + "=" + value));
+        return baseUrl + paramJoiner.toString();
     }
 
     public static String getCreateDatabaseQuery(String database, boolean ignoreIfExists) {

@@ -39,7 +39,8 @@ public class DorisCatalogFactory implements CatalogFactory {
                 options.get(DorisOptions.USERNAME),
                 options.get(DorisOptions.PASSWORD),
                 DorisConfig.of(options),
-                options.get(DorisOptions.DEFAULT_DATABASE));
+                options.get(DorisOptions.DEFAULT_DATABASE),
+                options.get(DorisOptions.DORIS_USE_ARROW_FLIGHT_SQL));
     }
 
     @Override

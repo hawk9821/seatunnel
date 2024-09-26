@@ -91,6 +91,8 @@ public class DorisCatalog implements Catalog {
 
     private TypeConverter<BasicTypeDefine> typeConverter;
 
+    private boolean useArrowFlightSql;
+
     public DorisCatalog(
             String catalogName,
             String frontEndNodes,
@@ -122,18 +124,23 @@ public class DorisCatalog implements Catalog {
             String username,
             String password,
             DorisConfig config,
-            String defaultDatabase) {
+            String defaultDatabase,
+            boolean useArrowFlightSql) {
         this(catalogName, frontEndNodes, queryPort, username, password, config);
         this.defaultDatabase = defaultDatabase;
+        this.useArrowFlightSql = useArrowFlightSql;
     }
 
     @Override
     public void open() throws CatalogException {
+        // todo doris arrow flight sql
         String jdbcUrl =
                 DorisCatalogUtil.getJdbcUrl(
                         DorisCatalogUtil.randomFrontEndHost(frontEndNodes),
                         queryPort,
-                        defaultDatabase);
+                        defaultDatabase,
+                        useArrowFlightSql,
+                        null);
         try {
             conn = DriverManager.getConnection(jdbcUrl, username, password);
             conn.getCatalog();
@@ -141,6 +148,7 @@ public class DorisCatalog implements Catalog {
             typeConverter = DorisTypeConverterFactory.getTypeConverter(dorisVersion);
         } catch (SQLException e) {
             throw new CatalogException(String.format("Failed to connect url %s", jdbcUrl), e);
+            // todo add doris open arrow flight sql check
         }
         LOG.info("Catalog {} established connection to {} success", catalogName, jdbcUrl);
     }

@@ -403,7 +403,7 @@ public class DorisIT extends AbstractDorisIT {
             Properties props = new Properties();
             props.put("user", USERNAME);
             props.put("password", PASSWORD);
-            conn = driver.connect(String.format(URL, container.getHost()), props);
+            conn = driver.connect(String.format(CONNECT_URL, container.getHost()), props);
             try (Statement statement = conn.createStatement()) {
                 // create test databases
                 statement.execute(createDatabase(sourceDB));

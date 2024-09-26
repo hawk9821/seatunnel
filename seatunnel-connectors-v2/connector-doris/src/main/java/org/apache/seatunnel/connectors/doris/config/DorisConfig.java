@@ -42,6 +42,7 @@ import static org.apache.seatunnel.connectors.doris.config.DorisOptions.DORIS_RE
 import static org.apache.seatunnel.connectors.doris.config.DorisOptions.DORIS_REQUEST_RETRIES;
 import static org.apache.seatunnel.connectors.doris.config.DorisOptions.DORIS_SINK_CONFIG_PREFIX;
 import static org.apache.seatunnel.connectors.doris.config.DorisOptions.DORIS_TABLET_SIZE;
+import static org.apache.seatunnel.connectors.doris.config.DorisOptions.DORIS_USE_ARROW_FLIGHT_SQL;
 import static org.apache.seatunnel.connectors.doris.config.DorisOptions.FENODES;
 import static org.apache.seatunnel.connectors.doris.config.DorisOptions.NEEDS_UNSUPPORTED_TYPE_CASTING;
 import static org.apache.seatunnel.connectors.doris.config.DorisOptions.PASSWORD;
@@ -85,6 +86,7 @@ public class DorisConfig implements Serializable {
     private int deserializeQueueSize;
     private Long execMemLimit;
     private boolean useOldApi;
+    private boolean useArrowFlightSql;
 
     // sink option
     private Boolean enable2PC;
@@ -129,6 +131,7 @@ public class DorisConfig implements Serializable {
         dorisConfig.setDeserializeQueueSize(config.get(DORIS_DESERIALIZE_QUEUE_SIZE));
         dorisConfig.setBatchSize(config.get(DORIS_BATCH_SIZE));
         dorisConfig.setExecMemLimit(config.get(DORIS_EXEC_MEM_LIMIT));
+        dorisConfig.setUseArrowFlightSql(config.get(DORIS_USE_ARROW_FLIGHT_SQL));
 
         // sink option
         dorisConfig.setEnable2PC(config.get(SINK_ENABLE_2PC));
