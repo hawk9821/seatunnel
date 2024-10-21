@@ -18,8 +18,12 @@
 #
 
 name: Update build status workflow
+on:
+  schedule:
+  - cron: "*/15 * * * *"
 jobs:
   update:
+    if: github.repository == 'apache/seatunnel'
     name: Update build status
     runs-on: ubuntu-20.04
     permissions:
