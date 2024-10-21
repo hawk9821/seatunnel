@@ -29,8 +29,8 @@ jobs:
       actions: read
       checks: write
     steps:
-      if: github.repository == 'apache/seatunnel'
       - name: "Update build status"
+        if: github.repository == 'apache/seatunnel'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
