@@ -18,7 +18,9 @@
 #
 
 name: Update build status workflow
-
+on:
+  workflow_call:
+  
 jobs:
   update:
     name: Update build status
