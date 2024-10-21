@@ -19,7 +19,6 @@
 
 name: Update build status workflow
 on:
-  if: github.repository == 'apache/seatunnel'
   schedule:
   - cron: "*/15 * * * *"
 jobs:
@@ -30,6 +29,7 @@ jobs:
       actions: read
       checks: write
     steps:
+      if: github.repository == 'apache/seatunnel'
       - name: "Update build status"
         uses: actions/github-script@v6
         with:
