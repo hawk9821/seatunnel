@@ -143,6 +143,9 @@ public abstract class AbstractDorisIT extends TestSuiteBase implements TestResou
                 statement.execute(DROP_BE);
                 statement.execute(String.format(ADD_BE, feIp));
                 log.info("doris BE initialized");
+            } else if (beList.isEmpty()) {
+                initializeBE();
+                log.warn("doris BE is empty");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
