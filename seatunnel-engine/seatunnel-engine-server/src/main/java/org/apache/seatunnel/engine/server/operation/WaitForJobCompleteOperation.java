@@ -21,6 +21,9 @@ import org.apache.seatunnel.engine.common.utils.PassiveCompletableFuture;
 import org.apache.seatunnel.engine.server.SeaTunnelServer;
 import org.apache.seatunnel.engine.server.serializable.ClientToServerOperationDataSerializerHook;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class WaitForJobCompleteOperation extends AbstractJobAsyncOperation {
 
     public WaitForJobCompleteOperation() {
@@ -34,14 +37,20 @@ public class WaitForJobCompleteOperation extends AbstractJobAsyncOperation {
     @Override
     protected PassiveCompletableFuture<?> doRun() throws Exception {
         SeaTunnelServer service = getService();
+        log.info("[{}]==================Client10, waitForJobComplete start", jobId);
         return new PassiveCompletableFuture<>(
                 service.getCoordinatorService()
                         .waitForJobComplete(jobId)
                         .thenApply(
-                                jobResult ->
-                                        this.getNodeEngine()
-                                                .getSerializationService()
-                                                .toData(jobResult)));
+                                jobResult -> {
+                                    log.info(
+                                            "[{}]==================Client15, waitForJobComplete end, jobResult:{}",
+                                            jobId,
+                                            jobResult);
+                                    return this.getNodeEngine()
+                                            .getSerializationService()
+                                            .toData(jobResult);
+                                }));
     }
 
     @Override

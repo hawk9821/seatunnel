@@ -46,6 +46,7 @@ import com.hazelcast.spi.impl.NodeEngine;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import scala.Tuple2;
 
 import java.io.Serializable;
@@ -59,6 +60,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 public class JobHistoryService {
 
     private final NodeEngine nodeEngine;
@@ -241,6 +243,11 @@ public class JobHistoryService {
         jobState.setStartTime(jobMaster.getStateTimestamp(JobStatus.SCHEDULED));
         jobState.setFinishTime(System.currentTimeMillis());
         jobState.setErrorMessage(jobMaster.getErrorMessage());
+        log.info(
+                "[{}]===========Step{}, store job status to histroy {}",
+                jobMaster.getJobId(),
+                13,
+                jobState);
         finishedJobStateImap.put(jobState.jobId, jobState, finishedJobExpireTime, TimeUnit.MINUTES);
     }
 

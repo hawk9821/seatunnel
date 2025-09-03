@@ -27,10 +27,12 @@ import com.hazelcast.nio.ObjectDataOutput;
 import com.hazelcast.nio.serialization.IdentifiedDataSerializable;
 import com.hazelcast.spi.impl.AllowedDuringPassiveState;
 import com.hazelcast.spi.impl.operationservice.Operation;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+@Slf4j
 public class GetJobStatusOperation extends Operation
         implements IdentifiedDataSerializable, AllowedDuringPassiveState {
     private long jobId;
@@ -78,6 +80,12 @@ public class GetJobStatusOperation extends Operation
                                 .getExecutor("get_job_status_operation"));
 
         try {
+            log.info("[{}]==================Client1, get JobStatus start", jobId);
+            JobStatus jobStatus = future.get();
+            log.info(
+                    "[{}]==================Client7, get JobStatus end, JobStatus : {}",
+                    jobId,
+                    jobStatus);
             response = future.get().ordinal();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);

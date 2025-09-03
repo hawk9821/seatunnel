@@ -89,6 +89,7 @@ import com.hazelcast.map.IMap;
 import com.hazelcast.spi.impl.NodeEngine;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -111,6 +112,7 @@ import static com.hazelcast.jet.impl.util.ExceptionUtil.withTryCatch;
 import static org.apache.seatunnel.api.common.SeaTunnelAPIErrorCode.HANDLE_SAVE_MODE_FAILED;
 import static org.apache.seatunnel.common.constants.JobMode.BATCH;
 
+@Slf4j
 public class JobMaster {
     private static final ILogger LOGGER = Logger.getLogger(JobMaster.class);
 
@@ -370,7 +372,9 @@ public class JobMaster {
                             JobMaster.this.errorMessage = v.getError();
                             JobResult jobResult =
                                     new JobResult(physicalPlan.getJobStatus(), v.getError());
+                            log.info("[{}]===========Step{}, start cleanJob", jobId, 9);
                             cleanJob();
+                            log.info("[{}]===========Step{}, finish cleanJob", jobId, 14);
                             jobMasterCompleteFuture.complete(jobResult);
                         }));
     }

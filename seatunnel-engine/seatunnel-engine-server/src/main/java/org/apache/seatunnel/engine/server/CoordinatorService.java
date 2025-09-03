@@ -79,6 +79,7 @@ import com.hazelcast.map.IMap;
 import com.hazelcast.ringbuffer.Ringbuffer;
 import com.hazelcast.spi.impl.NodeEngineImpl;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import scala.Tuple2;
 
 import java.util.ArrayList;
@@ -102,6 +103,7 @@ import java.util.stream.Collectors;
 
 import static org.apache.seatunnel.engine.server.metrics.JobMetricsUtil.toJobMetricsMap;
 
+@Slf4j
 public class CoordinatorService {
     private final NodeEngineImpl nodeEngine;
     private final ILogger logger;
@@ -274,6 +276,7 @@ public class CoordinatorService {
                         "Start calculating whether pending task resources are enough: %s", jobId));
 
         boolean preApplyResources = jobMaster.preApplyResources();
+        log.info("[{}]===========Step{}, Pre apply resources {}", jobId, 5, preApplyResources);
         if (!preApplyResources) {
             logger.info(
                     String.format(
@@ -287,6 +290,7 @@ public class CoordinatorService {
                 }
                 return;
             } else {
+                log.info("[{}]===========Step{}, Job pre apply resources failed", jobId, 10);
                 queueRemove(jobMaster);
                 completeFailJob(jobMaster);
                 pendingJobMasterMap.remove(jobId);
@@ -320,9 +324,11 @@ public class CoordinatorService {
                         pendingJobMasterMap.remove(jobId);
                         runningJobMasterMap.put(jobId, jobMaster);
                         jobMaster.run();
+                        log.info("[{}]===========Step{}, Job running success", jobId, 6);
                     } finally {
                         if (jobMasterCompletedSuccessfully(jobMaster, pendingSourceState)) {
                             runningJobMasterMap.remove(jobId);
+                            log.info("[{}]===========Step{}, Job run complete", jobId, 7);
                         }
                     }
                 });
@@ -344,7 +350,11 @@ public class CoordinatorService {
                         ExceptionUtils.getMessage(new NoEnoughResourceException()));
         jobMaster.getPhysicalPlan().updateJobState(JobStatus.FAILED);
         jobMaster.getPhysicalPlan().completeJobEndFuture(jobResult);
-
+        // JobMaster fail and store FAILED state.
+        log.info(
+                "[{}]===========Step{}, Job fail, store status to history",
+                jobMaster.getJobId(),
+                11);
         logger.info(
                 String.format(
                         "The job %s is not running because the resources is not enough insufficient",
@@ -644,6 +654,7 @@ public class CoordinatorService {
                         runningJobInfoIMap,
                         engineConfig,
                         seaTunnelServer);
+        log.info("[{}]===========Step{}, Submit job to coordinator service", jobId, 1);
         mdcExecutorService.submit(
                 () -> {
                     try {
@@ -660,10 +671,17 @@ public class CoordinatorService {
                         runningJobInfoIMap.put(
                                 jobId,
                                 new JobInfo(System.currentTimeMillis(), jobImmutableInformation));
+                        log.info(
+                                "[{}]===========Step{}, put job to pendingJobMasterMap and runningJobInfoIMap",
+                                jobId,
+                                2);
                         jobMaster.init(
                                 runningJobInfoIMap.get(jobId).getInitializationTimestamp(), false);
+                        log.info(
+                                "[{}]===========Step{}, Init job to coordinator service", jobId, 3);
                         // We specify that when init is complete, the submitJob is complete
                         jobSubmitFuture.complete(null);
+                        log.info("[{}]===========Step{}, Job submit success", jobId, 4);
                     } catch (Throwable e) {
                         String errorMsg = ExceptionUtils.getMessage(e);
                         logger.severe(String.format("submit job %s error %s ", jobId, errorMsg));
@@ -721,6 +739,7 @@ public class CoordinatorService {
     }
 
     public PassiveCompletableFuture<JobResult> waitForJobComplete(long jobId) {
+        log.info("[{}]==================Client11, start waitForJobComplete method", jobId);
         // must wait for all job restore complete
         restoreAllJobFromMasterNodeSwitchFuture.join();
         JobMaster runningJobMaster = getJobMaster(jobId);
@@ -735,6 +754,7 @@ public class CoordinatorService {
             JobHistoryService.JobState jobState = null;
             try {
                 jobState = jobStateFuture.get();
+                log.info("[{}]==================Client12,  {}", jobId, jobState);
             } catch (Exception e) {
                 throw new SeaTunnelEngineException("get job state error", e);
             }
@@ -745,8 +765,10 @@ public class CoordinatorService {
             } else {
                 future.complete(new JobResult(jobState.getJobStatus(), jobState.getErrorMessage()));
             }
+            log.info("[{}]==================Client13, end waitForJobComplete method", jobId);
             return new PassiveCompletableFuture<>(future);
         } else {
+            log.info("[{}]==================Client14, end waitForJobComplete method", jobId);
             return new PassiveCompletableFuture<>(runningJobMaster.getJobMasterCompleteFuture());
         }
     }
@@ -767,6 +789,10 @@ public class CoordinatorService {
                     CompletableFuture.supplyAsync(
                             () -> {
                                 runningJobMaster.cancelJob();
+                                log.info(
+                                        "[{}]===========Step{}, store status to history",
+                                        runningJobMaster.getJobId(),
+                                        12);
                                 return null;
                             },
                             executorService));
@@ -774,18 +800,31 @@ public class CoordinatorService {
     }
 
     public JobStatus getJobStatus(long jobId) {
+        log.info("[{}]==================Client2, get JobStatus ", jobId);
         if (pendingJobMasterMap.containsKey(jobId)) {
             return JobStatus.PENDING;
         }
         JobMaster runningJobMaster = runningJobMasterMap.get(jobId);
         if (runningJobMaster == null) {
             JobHistoryService.JobState jobDetailState = jobHistoryService.getJobDetailState(jobId);
+            log.info(
+                    "[{}]==================Client4, runningJobMaster not contains ,  {}",
+                    jobId,
+                    jobDetailState);
             return null == jobDetailState ? JobStatus.UNKNOWABLE : jobDetailState.getJobStatus();
         }
         JobStatus jobStatus = runningJobMaster.getJobStatus();
         if (jobStatus == null) {
+            log.info(
+                    "[{}]==================Client5, runningJobMaster contains and jobStatus is null, {} ",
+                    jobId,
+                    jobStatus);
             return jobHistoryService.getFinishedJobStateImap().get(jobId).getJobStatus();
         }
+        log.info(
+                "[{}]==================Client6, runningJobMaster contains and jobStatus not null, {} ",
+                jobId,
+                jobStatus);
         return jobStatus;
     }
 
