@@ -46,9 +46,8 @@
             <!-- SeaTunnel engine use begin -->
             <dependency>
                 <groupId>org.apache.seatunnel</groupId>
-                <artifactId>seatunnel-hazelcast-shade</artifactId>
-                <version>${project.version}</version>
-                <classifier>optional</classifier>
+                <artifactId>seatunnel-shade-hazelcast</artifactId>
+                <version>${seatunnel.shade.hazelcast.version}-${seatunnel.shade.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lmax</groupId>

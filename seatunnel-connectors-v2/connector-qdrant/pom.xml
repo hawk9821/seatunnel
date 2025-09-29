@@ -48,9 +48,8 @@
 
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-guava</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-guava</artifactId>
+            <version>${seatunnel.shade.guava.version}-${seatunnel.shade.version}</version>
         </dependency>
 
         <dependency>

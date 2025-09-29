@@ -28,6 +28,7 @@ import org.apache.seatunnel.e2e.common.container.ContainerExtendedFactory;
 import org.apache.seatunnel.e2e.common.container.TestContainer;
 import org.apache.seatunnel.e2e.common.container.TestContainerId;
 import org.apache.seatunnel.e2e.common.util.ContainerUtil;
+import org.apache.seatunnel.e2e.common.util.MavenJarUtil;
 
 import org.apache.commons.compress.utils.Lists;
 import org.apache.http.HttpStatus;
@@ -130,10 +131,9 @@ public class SeaTunnelContainer extends AbstractTestContainer {
                 Paths.get(SEATUNNEL_HOME, "config").toString());
 
         server.withCopyFileToContainer(
-                MountableFile.forHostPath(
-                        PROJECT_ROOT_PATH
-                                + "/seatunnel-shade/seatunnel-hadoop3-3.1.4-uber/target/seatunnel-hadoop3-3.1.4-uber.jar"),
-                Paths.get(SEATUNNEL_HOME, "lib/seatunnel-hadoop3-3.1.4-uber.jar").toString());
+                MountableFile.forHostPath(MavenJarUtil.getHadoop3UberJarPath()),
+                Paths.get(SEATUNNEL_HOME, "lib/seatunnel-shade-hadoop3-uber-3.1.4-2.3.13.jar")
+                        .toString());
         // execute extra commands
         executeExtraCommands(server);
 
@@ -179,10 +179,9 @@ public class SeaTunnelContainer extends AbstractTestContainer {
                 Paths.get(SEATUNNEL_HOME, "config", "seatunnel.yaml").toString());
 
         server.withCopyFileToContainer(
-                MountableFile.forHostPath(
-                        PROJECT_ROOT_PATH
-                                + "/seatunnel-shade/seatunnel-hadoop3-3.1.4-uber/target/seatunnel-hadoop3-3.1.4-uber.jar"),
-                Paths.get(SEATUNNEL_HOME, "lib/seatunnel-hadoop3-3.1.4-uber.jar").toString());
+                MountableFile.forHostPath(MavenJarUtil.getHadoop3UberJarPath()),
+                Paths.get(SEATUNNEL_HOME, "lib/seatunnel-shade-hadoop3-uber-3.1.4-2.3.13.jar")
+                        .toString());
 
         server.start();
         // execute extra commands

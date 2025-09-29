@@ -72,9 +72,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-thrift-service</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-thrift-service</artifactId>
+            <version>${seatunnel.shade.thrift-service.version}-${seatunnel.shade.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.thrift</groupId>

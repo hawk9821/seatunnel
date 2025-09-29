@@ -54,9 +54,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-hazelcast-shade</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-hazelcast</artifactId>
+            <version>${seatunnel.shade.hazelcast.version}-${seatunnel.shade.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -74,10 +73,10 @@
 
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-jetty9-9.4.56</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-jetty</artifactId>
+            <version>${seatunnel.shade.jetty.version}-${seatunnel.shade.version}</version>
         </dependency>
+
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -112,9 +111,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-hadoop3-3.1.4-uber</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-hadoop3-uber</artifactId>
+            <version>${seatunnel.shade.hadoop.version}-${seatunnel.shade.version}</version>
             <scope>provided</scope>
         </dependency>
 

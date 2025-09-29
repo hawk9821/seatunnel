@@ -108,9 +108,8 @@
 
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-hikari</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-hikari</artifactId>
+            <version>${seatunnel.shade.hikari.version}-${seatunnel.shade.version}</version>
         </dependency>
 
         <dependency>

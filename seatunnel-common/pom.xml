@@ -37,9 +37,8 @@
 
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-commons-lang3</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-commons-lang3</artifactId>
+            <version>${seatunnel.shade.commons-lang3.version}-${seatunnel.shade.version}</version>
         </dependency>
 
         <dependency>
@@ -53,23 +52,20 @@
 
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-guava</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-guava</artifactId>
+            <version>${seatunnel.shade.guava.version}-${seatunnel.shade.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-jackson</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-jackson</artifactId>
+            <version>${seatunnel.shade.jackson.version}-${seatunnel.shade.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-arrow</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-arrow</artifactId>
+            <version>${seatunnel.shade.arraw.version}-${seatunnel.shade.version}</version>
         </dependency>
 
         <dependency>

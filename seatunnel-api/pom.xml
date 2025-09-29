@@ -42,9 +42,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
-            <artifactId>seatunnel-jackson</artifactId>
-            <version>${project.version}</version>
-            <classifier>optional</classifier>
+            <artifactId>seatunnel-shade-jackson</artifactId>
+            <version>${seatunnel.shade.jackson.version}-${seatunnel.shade.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
