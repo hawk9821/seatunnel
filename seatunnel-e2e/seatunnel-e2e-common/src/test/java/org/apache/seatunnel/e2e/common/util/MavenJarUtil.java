@@ -30,11 +30,12 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Properties;
 
 public class MavenJarUtil {
 
-    public static Properties getPomProperties() {
+    private static Properties getPomProperties() {
         MavenXpp3Reader reader = new MavenXpp3Reader();
         String pomFilePath = ContainerUtil.PROJECT_ROOT_PATH + "/pom.xml";
         try (FileReader fileReader = new FileReader(pomFilePath)) {
@@ -45,7 +46,7 @@ public class MavenJarUtil {
         }
     }
 
-    public static String getLocalRepositoryPath() {
+    private static String getLocalRepositoryPath() {
         DefaultSettingsBuilder settingsBuilder = new DefaultSettingsBuilderFactory().newInstance();
         DefaultSettingsBuildingRequest request = new DefaultSettingsBuildingRequest();
 
@@ -61,7 +62,8 @@ public class MavenJarUtil {
         } catch (SettingsBuildingException e) {
             throw new RuntimeException(e);
         }
-        return settings.getLocalRepository();
+        return Optional.ofNullable(settings.getLocalRepository())
+                .orElse(System.getProperty("user.home") + "/.m2/repository");
     }
 
     public static String getHadoop3UberJarPath() {

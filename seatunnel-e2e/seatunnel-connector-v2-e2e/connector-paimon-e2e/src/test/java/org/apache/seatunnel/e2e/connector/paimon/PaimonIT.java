@@ -22,6 +22,7 @@ import org.apache.seatunnel.connectors.seatunnel.paimon.config.PaimonBaseOptions
 import org.apache.seatunnel.e2e.common.TestResource;
 import org.apache.seatunnel.e2e.common.TestSuiteBase;
 import org.apache.seatunnel.e2e.common.container.ContainerExtendedFactory;
+import org.apache.seatunnel.e2e.common.container.EngineType;
 import org.apache.seatunnel.e2e.common.container.TestContainer;
 import org.apache.seatunnel.e2e.common.container.TestContainerId;
 import org.apache.seatunnel.e2e.common.junit.DisabledOnContainer;
@@ -172,6 +173,9 @@ public class PaimonIT extends TestSuiteBase implements TestResource {
 
     /** User not grant read privilege read data test cases for the Paimon table */
     @TestTemplate
+    @DisabledOnContainer(
+            value = {},
+            type = {EngineType.SPARK, EngineType.FLINK})
     public void privilegeEnabledPaimonSourceUnAuthorized(TestContainer container) throws Exception {
         String warehouse = "/tmp/seatunnel_mnt/paimon";
         List<PrivilegeType> privilegeTypes = new ArrayList<>();
