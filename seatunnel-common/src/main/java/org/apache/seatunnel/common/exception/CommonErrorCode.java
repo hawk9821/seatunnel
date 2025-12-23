@@ -81,6 +81,9 @@ public enum CommonErrorCode implements SeaTunnelErrorCode {
     KERBEROS_AUTHORIZED_FAILED("COMMON-35", "Kerberos authorized failed"),
     CLOSE_FAILED("COMMON-36", "'<identifier>' close failed."),
     SEATUNNEL_ROW_SERIALIZE_FAILED("COMMON-37", "Seatunnel row serialize failed. Row={ '<row>' }"),
+    FORMAT_TIME_ERROR(
+            "COMMON-38",
+            "The date format '<time>' of field '<field>' is not supported. Please check the time format."),
     ;
 
     private final String code;

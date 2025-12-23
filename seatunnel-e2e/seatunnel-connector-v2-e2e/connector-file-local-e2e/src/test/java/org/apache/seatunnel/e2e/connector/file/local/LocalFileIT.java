@@ -40,6 +40,7 @@ import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.TestTemplate;
+import org.testcontainers.containers.Container;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.shaded.com.github.dockerjava.core.command.ExecStartResultCallback;
 
@@ -438,6 +439,22 @@ public class LocalFileIT extends TestSuiteBase {
         Assertions.assertEquals(getFileListFromContainer(path).size(), 1);
         helper.execute("/json/fake_to_local_file_json_save_mode.conf");
         Assertions.assertEquals(getFileListFromContainer(path).size(), 1);
+    }
+
+    @TestTemplate
+    @DisabledOnContainer(
+            value = {TestContainerId.SPARK_2_4},
+            type = {EngineType.FLINK},
+            disabledReason =
+                    "Fink test is multi-node, LocalFile connector will use different containers for obtaining files")
+    public void testLocalFileReadWithHeader(TestContainer container)
+            throws IOException, InterruptedException {
+        Container.ExecResult execResult =
+                container.executeJob("/csv/csv_with_header_to_console.conf");
+        Assertions.assertEquals(0, execResult.getExitCode());
+        String output = execResult.getStdout();
+        log.info("container stdout is :{}", output);
+        Assertions.assertTrue(output.contains("SeaTunnelRow#kind=INSERT : 20, tom, true"));
     }
 
     @SneakyThrows

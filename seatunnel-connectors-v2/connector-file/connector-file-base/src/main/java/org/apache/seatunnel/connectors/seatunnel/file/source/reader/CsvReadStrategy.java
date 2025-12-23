@@ -44,6 +44,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVFormat.Builder;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.input.BOMInputStream;
 
 import io.airlift.compress.lzo.LzopCodec;
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +53,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
@@ -61,12 +63,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CsvReadStrategy extends AbstractReadStrategy {
     private CsvDeserializationSchema deserializationSchema;
-    private DateUtils.Formatter dateFormat =
-            FileBaseSourceOptions.DATE_FORMAT_LEGACY.defaultValue();
-    private DateTimeUtils.Formatter datetimeFormat =
-            FileBaseSourceOptions.DATETIME_FORMAT_LEGACY.defaultValue();
-    private TimeUtils.Formatter timeFormat =
-            FileBaseSourceOptions.TIME_FORMAT_LEGACY.defaultValue();
     private CompressFormat compressFormat = FileBaseSourceOptions.COMPRESS_CODEC.defaultValue();
     private CsvLineProcessor processor;
     private int[] indexes;
@@ -124,71 +120,74 @@ public class CsvReadStrategy extends AbstractReadStrategy {
                 csvFormat = csvFormat.withFirstRecordAsHeader();
             }
         }
-        try (BufferedReader reader =
-                        new BufferedReader(new InputStreamReader(actualInputStream, encoding));
-                CSVParser csvParser = new CSVParser(reader, csvFormat); ) {
-            // test and skip `\uFEFF` BOM
-            reader.mark(1);
-            int firstChar = reader.read();
-            if (firstChar != 0xFEFF) {
-                reader.reset();
-            }
-            // skip lines
-            // if enableSplitFile is true,no need to skip
-            if (!enableSplitFile) {
-                for (int i = 0; i < skipHeaderNumber; i++) {
-                    if (reader.readLine() == null) {
-                        throw new IOException(
-                                String.format(
-                                        "File [%s] has fewer lines than expected to skip.",
-                                        currentFileName));
+
+        try (BOMInputStream bomIn = new BOMInputStream(actualInputStream)) {
+            Charset charset =
+                    bomIn.getBOM() == null
+                            ? Charset.forName(encoding)
+                            : Charset.forName(bomIn.getBOM().getCharsetName());
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(bomIn, charset));
+                    CSVParser csvParser = new CSVParser(reader, csvFormat)) {
+                // skip lines
+                // if enableSplitFile is true,no need to skip
+                if (!enableSplitFile) {
+                    for (int i = 0; i < skipHeaderNumber; i++) {
+                        if (reader.readLine() == null) {
+                            throw new IOException(
+                                    String.format(
+                                            "File [%s] has fewer lines than expected to skip.",
+                                            currentFileName));
+                        }
                     }
                 }
-            }
-            // read lines
-            List<String> headers = getHeaders(csvParser);
-            for (CSVRecord csvRecord : csvParser) {
-                HashMap<Integer, String> fieldIdValueMap = new HashMap<>();
-                for (int i = 0; i < headers.size(); i++) {
-                    // the user input schema may not contain all the columns in the csv header
-                    // and may contain columns in a different order with the csv header
-                    int index =
-                            inputCatalogTable.getSeaTunnelRowType().indexOf(headers.get(i), false);
-                    if (index == -1) {
-                        continue;
+                // read lines
+                List<String> headers = getHeaders(csvParser);
+                for (CSVRecord csvRecord : csvParser) {
+                    HashMap<Integer, String> fieldIdValueMap = new HashMap<>();
+                    for (int i = 0; i < headers.size(); i++) {
+                        // the user input schema may not contain all the columns in the csv header
+                        // and may contain columns in a different order with the csv header
+                        int index =
+                                inputCatalogTable
+                                        .getSeaTunnelRowType()
+                                        .indexOf(headers.get(i), false);
+                        if (index == -1) {
+                            continue;
+                        }
+                        fieldIdValueMap.put(index, csvRecord.get(i));
                     }
-                    fieldIdValueMap.put(index, csvRecord.get(i));
-                }
-                SeaTunnelRow seaTunnelRow = deserializationSchema.getSeaTunnelRow(fieldIdValueMap);
-                if (!readColumns.isEmpty()) {
-                    // need column projection
-                    Object[] fields;
+                    SeaTunnelRow seaTunnelRow =
+                            deserializationSchema.getSeaTunnelRow(fieldIdValueMap);
+                    if (!readColumns.isEmpty()) {
+                        // need column projection
+                        Object[] fields;
+                        if (isMergePartition) {
+                            fields = new Object[readColumns.size() + partitionsMap.size()];
+                        } else {
+                            fields = new Object[readColumns.size()];
+                        }
+                        for (int i = 0; i < indexes.length; i++) {
+                            fields[i] = seaTunnelRow.getField(indexes[i]);
+                        }
+                        seaTunnelRow = new SeaTunnelRow(fields);
+                    }
                     if (isMergePartition) {
-                        fields = new Object[readColumns.size() + partitionsMap.size()];
-                    } else {
-                        fields = new Object[readColumns.size()];
+                        int index = seaTunnelRowType.getTotalFields();
+                        for (String value : partitionsMap.values()) {
+                            seaTunnelRow.setField(index++, value);
+                        }
                     }
-                    for (int i = 0; i < indexes.length; i++) {
-                        fields[i] = seaTunnelRow.getField(indexes[i]);
-                    }
-                    seaTunnelRow = new SeaTunnelRow(fields);
+                    seaTunnelRow.setTableId(split.getTableId());
+                    output.collect(seaTunnelRow);
                 }
-                if (isMergePartition) {
-                    int index = seaTunnelRowType.getTotalFields();
-                    for (String value : partitionsMap.values()) {
-                        seaTunnelRow.setField(index++, value);
-                    }
-                }
-                seaTunnelRow.setTableId(split.getTableId());
-                output.collect(seaTunnelRow);
+            } catch (IOException e) {
+                String errorMsg =
+                        String.format(
+                                "Deserialize this file [%s] failed, please check the origin data",
+                                currentFileName);
+                throw new FileConnectorException(
+                        FileConnectorErrorCode.DATA_DESERIALIZE_FAILED, errorMsg, e);
             }
-        } catch (IOException e) {
-            String errorMsg =
-                    String.format(
-                            "Deserialize this file [%s] failed, please check the origin data",
-                            currentFileName);
-            throw new FileConnectorException(
-                    FileConnectorErrorCode.DATA_DESERIALIZE_FAILED, errorMsg, e);
         }
     }
 
@@ -239,6 +238,24 @@ public class CsvReadStrategy extends AbstractReadStrategy {
                                 readonlyConfig
                                         .getOptional(FileBaseSourceOptions.NULL_FORMAT)
                                         .orElse(null));
+        readonlyConfig
+                .getOptional(FileBaseSourceOptions.DATETIME_FORMAT_LEGACY)
+                .ifPresent(builder::dateTimeFormatter);
+        readonlyConfig
+                .getOptional(FileBaseSourceOptions.DATETIME_FORMAT)
+                .ifPresent(val -> builder.dateTimeFormatter(DateTimeUtils.Formatter.parse(val)));
+        readonlyConfig
+                .getOptional(FileBaseSourceOptions.DATE_FORMAT_LEGACY)
+                .ifPresent(builder::dateFormatter);
+        readonlyConfig
+                .getOptional(FileBaseSourceOptions.DATE_FORMAT)
+                .ifPresent(val -> builder.dateFormatter(DateUtils.Formatter.parse(val)));
+        readonlyConfig
+                .getOptional(FileBaseSourceOptions.TIME_FORMAT_LEGACY)
+                .ifPresent(builder::timeFormatter);
+        readonlyConfig
+                .getOptional(FileBaseSourceOptions.TIME_FORMAT)
+                .ifPresent(val -> builder.timeFormatter(TimeUtils.Formatter.parse(val)));
         if (isMergePartition) {
             deserializationSchema =
                     builder.seaTunnelRowType(this.seaTunnelRowTypeWithPartition).build();
@@ -303,28 +320,14 @@ public class CsvReadStrategy extends AbstractReadStrategy {
     }
 
     private void initFormatter() {
-        if (pluginConfig.hasPath(FileBaseSourceOptions.DATE_FORMAT_LEGACY.key())) {
-            dateFormat =
-                    DateUtils.Formatter.parse(
-                            pluginConfig.getString(FileBaseSourceOptions.DATE_FORMAT_LEGACY.key()));
-        }
-        if (pluginConfig.hasPath(FileBaseSourceOptions.DATETIME_FORMAT_LEGACY.key())) {
-            datetimeFormat =
-                    DateTimeUtils.Formatter.parse(
-                            pluginConfig.getString(
-                                    FileBaseSourceOptions.DATETIME_FORMAT_LEGACY.key()));
-        }
-        if (pluginConfig.hasPath(FileBaseSourceOptions.TIME_FORMAT_LEGACY.key())) {
-            timeFormat =
-                    TimeUtils.Formatter.parse(
-                            pluginConfig.getString(FileBaseSourceOptions.TIME_FORMAT_LEGACY.key()));
-        }
-        if (pluginConfig.hasPath(FileBaseSourceOptions.COMPRESS_CODEC.key())) {
-            String compressCodec =
-                    pluginConfig.getString(FileBaseSourceOptions.COMPRESS_CODEC.key());
-            compressFormat = CompressFormat.valueOf(compressCodec.toUpperCase());
-        }
-
+        ReadonlyConfig readonlyConfig = ReadonlyConfig.fromConfig(pluginConfig);
+        readonlyConfig
+                .getOptional(FileBaseSourceOptions.COMPRESS_CODEC)
+                .ifPresent(
+                        compressCodec ->
+                                compressFormat =
+                                        CompressFormat.valueOf(
+                                                compressCodec.getCompressCodec().toUpperCase()));
         processor = new DefaultCsvLineProcessor();
     }
 }

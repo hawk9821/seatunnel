@@ -17,6 +17,8 @@
 
 package org.apache.seatunnel.common.utils;
 
+import lombok.Getter;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,11 +31,10 @@ import java.time.format.SignStyle;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalQueries;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import static java.time.temporal.ChronoField.DAY_OF_MONTH;
@@ -42,8 +43,7 @@ import static java.time.temporal.ChronoField.YEAR;
 
 public class DateTimeUtils {
 
-    private static final Map<Formatter, DateTimeFormatter> FORMATTER_MAP =
-            new HashMap<Formatter, DateTimeFormatter>();
+    private static final Map<Formatter, DateTimeFormatter> FORMATTER_MAP = new HashMap<>();
 
     static {
         FORMATTER_MAP.put(
@@ -87,187 +87,141 @@ public class DateTimeUtils {
                 DateTimeFormatter.ofPattern(Formatter.YYYY_MM_DD_HH_MM_SS_SSSSSSSSS_ISO8601.value));
     }
 
-    // if the datatime string length is 17, find the DateTimeFormatter from this map
-    public static final Map<Pattern, DateTimeFormatter> YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP =
-            new LinkedHashMap<>();
+    // Define date-time format pattern, containing regex and corresponding formatter
+    private static class DateTimePattern {
+        final Pattern pattern;
+        final DateTimeFormatter formatter;
 
-    // if the datatime string length is 15, find the DateTimeFormatter from this map
-    public static final Map<Pattern, DateTimeFormatter> YYYY_M_D_HH_MM_15_FORMATTER_MAP =
-            new LinkedHashMap<>();
+        DateTimePattern(String regex, DateTimeFormatter formatter) {
+            this.pattern = Pattern.compile(regex);
+            this.formatter = formatter;
+        }
 
-    // all Pattern in this set
-    public static Set<Map.Entry<Pattern, DateTimeFormatter>>
-            YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP_ENTRY_SET = new LinkedHashSet<>();
+        DateTimePattern(String regex, String format) {
+            this.pattern = Pattern.compile(regex);
+            this.formatter = DateTimeFormatter.ofPattern(format);
+        }
+    }
 
-    // all Pattern in this set
-    public static Set<Map.Entry<Pattern, DateTimeFormatter>>
-            YYYY_M_D_HH_MM_15_FORMATTER_MAP_ENTRY_SET = new LinkedHashSet<>();
-
-    // if the datatime string length is 19, find the DateTimeFormatter from this map
-    public static final Map<Pattern, DateTimeFormatter> YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP =
-            new LinkedHashMap<>();
-
-    public static Set<Map.Entry<Pattern, DateTimeFormatter>>
-            YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP_ENTRY_SET = new LinkedHashSet<>();
-
-    // if the datatime string length bigger than 19, find the DateTimeFormatter from this map
-    public static final Map<Pattern, DateTimeFormatter> YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP =
-            new LinkedHashMap<>();
-    public static Set<Map.Entry<Pattern, DateTimeFormatter>>
-            YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP_ENTRY_SET = new LinkedHashSet<>();
-
-    // if the datatime string length is 14, use this formatter
-    public static final DateTimeFormatter YYYY_MM_DD_HH_MM_SS_14_FORMATTER =
-            DateTimeFormatter.ofPattern(Formatter.YYYY_MM_DD_HH_MM_SS_NO_SPLIT.value);
+    // List of date-time format patterns, sorted by priority
+    private static final List<DateTimePattern> PATTERN_LIST = new ArrayList<>();
 
     static {
-        YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_MM_DD_HH_MM_SS.value));
+        // Initialize date-time format patterns - most common formats first
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}",
+                        Formatter.YYYY_MM_DD_HH_MM_SS.value)); // Most common: yyyy-MM-dd HH:mm:ss
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+                        Formatter.YYYY_MM_DD_HH_MM_SS_ISO8601.value)); // ISO8601 format
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}/\\d{2}/\\d{2}\\s\\d{2}:\\d{2}:\\d{2}",
+                        Formatter.YYYY_MM_DD_HH_MM_SS_SLASH.value)); // Slash format
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}\\.\\d{2}\\.\\d{2}\\s\\d{2}:\\d{2}:\\d{2}",
+                        Formatter.YYYY_MM_DD_HH_MM_SS_SPOT.value)); // Dot format
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{14}",
+                        Formatter.YYYY_MM_DD_HH_MM_SS_NO_SPLIT.value)); // 14-digit format
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2}",
+                        Formatter.YYYY_M_D_HH_MM_SS_ISO8601
+                                .value)); // Single-digit month/day (dash)
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2}",
+                        Formatter.YYYY_M_D_HH_MM_SS_SLASH.value)); // Single-digit month/day (slash)
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}",
+                        Formatter.YYYY_M_D_HH_MM_ISO8601
+                                .value)); // No seconds (single-digit month/day)
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{2}:\\d{2}",
+                        Formatter.YYYY_M_D_HH_MM_SLASH
+                                .value)); // No seconds (single-digit month/day)
 
-        YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}.*"),
-                new DateTimeFormatterBuilder()
-                        .parseCaseInsensitive()
-                        .append(DateTimeFormatter.ISO_LOCAL_DATE)
-                        .appendLiteral(' ')
-                        .append(DateTimeFormatter.ISO_LOCAL_TIME)
-                        .toFormatter());
-
-        YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_MM_DD_HH_MM_SS_ISO8601.value));
-
-        YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}.*"),
-                DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-
-        YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}/\\d{2}/\\d{2}\\s\\d{2}:\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_MM_DD_HH_MM_SS_SLASH.value));
-
-        YYYY_M_D_HH_MM_15_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_M_D_HH_MM_SLASH.value));
-
-        YYYY_M_D_HH_MM_15_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_M_D_HH_MM_ISO8601.value));
-
-        YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_M_D_HH_MM_SS_SLASH.value));
-
-        YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_M_D_HH_MM_SS_ISO8601.value));
-
-        YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}/\\d{2}/\\d{2}\\s\\d{2}:\\d{2}.*"),
-                new DateTimeFormatterBuilder()
-                        .parseCaseInsensitive()
-                        .append(
-                                new DateTimeFormatterBuilder()
-                                        .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-                                        .appendLiteral('/')
-                                        .appendValue(MONTH_OF_YEAR, 2)
-                                        .appendLiteral('/')
-                                        .appendValue(DAY_OF_MONTH, 2)
-                                        .toFormatter())
-                        .appendLiteral(' ')
-                        .append(DateTimeFormatter.ISO_LOCAL_TIME)
-                        .toFormatter());
-
-        YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}\\.\\d{2}\\.\\d{2}\\s\\d{2}:\\d{2}:\\d{2}"),
-                DateTimeFormatter.ofPattern(Formatter.YYYY_MM_DD_HH_MM_SS_SPOT.value));
-
-        YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}\\.\\d{2}\\.\\d{2}\\s\\d{2}:\\d{2}.*"),
-                new DateTimeFormatterBuilder()
-                        .parseCaseInsensitive()
-                        .append(
-                                new DateTimeFormatterBuilder()
-                                        .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-                                        .appendLiteral('.')
-                                        .appendValue(MONTH_OF_YEAR, 2)
-                                        .appendLiteral('.')
-                                        .appendValue(DAY_OF_MONTH, 2)
-                                        .toFormatter())
-                        .appendLiteral(' ')
-                        .append(DateTimeFormatter.ISO_LOCAL_TIME)
-                        .toFormatter());
-
-        YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP.put(
-                Pattern.compile("\\d{4}年\\d{2}月\\d{2}日\\s\\d{2}时\\d{2}分\\d{2}秒"),
-                DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH时mm分ss秒"));
-
-        YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP_ENTRY_SET.addAll(
-                YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP.entrySet());
-        YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP_ENTRY_SET.addAll(
-                YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP.entrySet());
-
-        YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP_ENTRY_SET.addAll(
-                YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP.entrySet());
-
-        YYYY_M_D_HH_MM_15_FORMATTER_MAP_ENTRY_SET.addAll(
-                YYYY_M_D_HH_MM_15_FORMATTER_MAP.entrySet());
+        // With milliseconds formats
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}.*",
+                        new DateTimeFormatterBuilder()
+                                .parseCaseInsensitive()
+                                .append(DateTimeFormatter.ISO_LOCAL_DATE)
+                                .appendLiteral(' ')
+                                .append(DateTimeFormatter.ISO_LOCAL_TIME)
+                                .toFormatter())); // With milliseconds (dash)
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}.*",
+                        DateTimeFormatter.ISO_LOCAL_DATE_TIME)); // With milliseconds (ISO8601)
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}/\\d{2}/\\d{2}\\s\\d{2}:\\d{2}.*",
+                        new DateTimeFormatterBuilder()
+                                .parseCaseInsensitive()
+                                .append(
+                                        new DateTimeFormatterBuilder()
+                                                .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+                                                .appendLiteral('/')
+                                                .appendValue(MONTH_OF_YEAR, 2)
+                                                .appendLiteral('/')
+                                                .appendValue(DAY_OF_MONTH, 2)
+                                                .toFormatter())
+                                .appendLiteral(' ')
+                                .append(DateTimeFormatter.ISO_LOCAL_TIME)
+                                .toFormatter())); // With milliseconds (slash)
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}\\.\\d{2}\\.\\d{2}\\s\\d{2}:\\d{2}.*",
+                        new DateTimeFormatterBuilder()
+                                .parseCaseInsensitive()
+                                .append(
+                                        new DateTimeFormatterBuilder()
+                                                .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+                                                .appendLiteral('.')
+                                                .appendValue(MONTH_OF_YEAR, 2)
+                                                .appendLiteral('.')
+                                                .appendValue(DAY_OF_MONTH, 2)
+                                                .toFormatter())
+                                .appendLiteral(' ')
+                                .append(DateTimeFormatter.ISO_LOCAL_TIME)
+                                .toFormatter())); // With milliseconds (dot)
+        PATTERN_LIST.add(
+                new DateTimePattern(
+                        "\\d{4}年\\d{2}月\\d{2}日\\s\\d{2}时\\d{2}分\\d{2}秒",
+                        "yyyy年MM月dd日 HH时mm分ss秒")); // Chinese format
     }
 
     /**
-     * gave a datetime string and return the {@link DateTimeFormatter} which can be used to parse
-     * it.
+     * Match the corresponding DateTimeFormatter based on the date-time string
      *
-     * @param dateTime eg: 2020-02-03 12:12:10.101
-     * @return the DateTimeFormatter matched, will return null when not matched any pattern
+     * @param dateTime Date-time string, e.g.: 2020-02-03 12:12:10.101
+     * @return Matched DateTimeFormatter, or null if no pattern matches
      */
     public static DateTimeFormatter matchDateTimeFormatter(String dateTime) {
-        if (dateTime.length() == 19) {
-            for (Map.Entry<Pattern, DateTimeFormatter> entry :
-                    YYYY_MM_DD_HH_MM_SS_19_FORMATTER_MAP_ENTRY_SET) {
-                if (entry.getKey().matcher(dateTime).matches()) {
-                    return entry.getValue();
-                }
+        for (DateTimePattern pattern : PATTERN_LIST) {
+            if (pattern.pattern.matcher(dateTime).matches()) {
+                return pattern.formatter;
             }
-            for (Map.Entry<Pattern, DateTimeFormatter> entry :
-                    YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP_ENTRY_SET) {
-                if (entry.getKey().matcher(dateTime).matches()) {
-                    return entry.getValue();
-                }
-            }
-        } else if (dateTime.length() > 19) {
-            for (Map.Entry<Pattern, DateTimeFormatter> entry :
-                    YYYY_MM_DD_HH_MM_SS_M19_FORMATTER_MAP_ENTRY_SET) {
-                if (entry.getKey().matcher(dateTime).matches()) {
-                    return entry.getValue();
-                }
-            }
-        } else if (dateTime.length() == 17 || dateTime.length() == 18) {
-            for (Map.Entry<Pattern, DateTimeFormatter> entry :
-                    YYYY_M_D_HH_MM_SS_17_FORMATTER_MAP_ENTRY_SET) {
-                if (entry.getKey().matcher(dateTime).matches()) {
-                    return entry.getValue();
-                }
-            }
-        } else if (dateTime.length() == 15 || dateTime.length() == 16) {
-            for (Map.Entry<Pattern, DateTimeFormatter> entry :
-                    YYYY_M_D_HH_MM_15_FORMATTER_MAP_ENTRY_SET) {
-                if (entry.getKey().matcher(dateTime).matches()) {
-                    return entry.getValue();
-                }
-            }
-        } else if (dateTime.length() == 14) {
-            for (Map.Entry<Pattern, DateTimeFormatter> entry :
-                    YYYY_M_D_HH_MM_15_FORMATTER_MAP_ENTRY_SET) {
-                if (entry.getKey().matcher(dateTime).matches()) {
-                    return entry.getValue();
-                }
-            }
-            return YYYY_MM_DD_HH_MM_SS_14_FORMATTER;
         }
         return null;
     }
 
+    /**
+     * Parse date-time string using the specified DateTimeFormatter
+     *
+     * @param dateTime Date-time string
+     * @param dateTimeFormatter Date-time formatter
+     * @return Parsed LocalDateTime object
+     */
     public static LocalDateTime parse(String dateTime, DateTimeFormatter dateTimeFormatter) {
         TemporalAccessor parsedTimestamp = dateTimeFormatter.parse(dateTime);
         LocalTime localTime = parsedTimestamp.query(TemporalQueries.localTime());
@@ -276,31 +230,51 @@ public class DateTimeUtils {
     }
 
     /**
-     * gave a datetime string and return {@link LocalDateTime}
+     * Automatically infer date-time string format and parse
      *
-     * <p>Due to the need to determine the rules of the formatter through regular expressions, there
-     * will be a certain performance loss. When tested on 8c16g macos, the most significant
-     * performance decrease compared to directly passing the formatter is
-     * 'Pattern.compile("\\d{4}\\.\\d{2}\\.\\d{2}\\s\\d{2}:\\d{2}.*")' has increased from 4.5
-     * seconds to 10 seconds in a scenario where 1000w calculations are performed.
+     * <p>Note: There is a certain performance loss due to the need to determine the formatter rules
+     * through regular expressions. Tested on 8c16g macOS, compared with directly passing the
+     * formatter, the most obvious performance degradation is
+     * 'Pattern.compile("\\d{4}\\.\\d{2}\\.\\d{2}\\s\\d{2}:\\d{2}.*")' in a scenario of 10 million
+     * calculations, increasing from 4.5 seconds to 10 seconds.
      *
-     * <p>Analysis shows that there are two main reasons: one is that the regular expression
-     * position in the map is 4, before this, three regular expression matches are required.
+     * <p>Analysis shows there are two main reasons: First, the position of this regular expression
+     * in the mapping is 4, and three regular expression matches are needed before it; Second, in
+     * order to support non-fixed millisecond digits (minimum 0 digits, maximum 9 digits), we use
+     * {@link DateTimeFormatter#ISO_LOCAL_TIME}, which also increases the time for time conversion.
      *
-     * <p>Another reason is to support the length of non fixed millisecond bits (minimum 0, maximum
-     * 9), we used {@link DateTimeFormatter#ISO_LOCAL_TIME}, which also increases the time for time
-     * conversion.
-     *
-     * @param dateTime eg: 2020-02-03 12:12:10.101
-     * @return {@link LocalDateTime}
+     * @param dateTime Date-time string, e.g.: 2020-02-03 12:12:10.101
+     * @return Parsed LocalDateTime object
      */
     public static LocalDateTime parse(String dateTime) {
         DateTimeFormatter dateTimeFormatter = matchDateTimeFormatter(dateTime);
+        if (dateTimeFormatter == null) {
+            throw new IllegalArgumentException("Unsupported datetime format: " + dateTime);
+        }
         return LocalDateTime.parse(dateTime, dateTimeFormatter);
     }
 
+    /**
+     * Parse date-time string using the specified Formatter enum
+     *
+     * @param dateTime Date-time string
+     * @param formatter Date-time format enum
+     * @return Parsed LocalDateTime object
+     */
     public static LocalDateTime parse(String dateTime, Formatter formatter) {
         return LocalDateTime.parse(dateTime, FORMATTER_MAP.get(formatter));
+    }
+
+    /**
+     * Parse date-time string using the specified format string
+     *
+     * @param dateTime Date-time string
+     * @param format Date-time format string, e.g.: yyyy-MM-dd HH:mm:ss
+     * @return Parsed LocalDateTime object
+     */
+    public static LocalDateTime parse(String dateTime, String format) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
+        return LocalDateTime.parse(dateTime, dateTimeFormatter);
     }
 
     public static LocalDateTime parse(long timestamp) {
@@ -312,14 +286,47 @@ public class DateTimeUtils {
         return LocalDateTime.ofInstant(instant, zoneId);
     }
 
+    /**
+     * Format LocalDateTime to string with specified format
+     *
+     * @param dateTime Date-time object
+     * @param formatter Date-time format enum
+     * @return Formatted string
+     */
     public static String toString(LocalDateTime dateTime, Formatter formatter) {
         return dateTime.format(FORMATTER_MAP.get(formatter));
     }
 
+    /**
+     * Format LocalDateTime to string with specified format string
+     *
+     * @param dateTime Date-time object
+     * @param format Date-time format string, e.g.: yyyy-MM-dd HH:mm:ss
+     * @return Formatted string
+     */
+    public static String toString(LocalDateTime dateTime, String format) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
+        return dateTime.format(dateTimeFormatter);
+    }
+
+    /**
+     * Format OffsetDateTime to string with specified format
+     *
+     * @param offsetDateTime Offset date-time object
+     * @param formatter Date-time format enum
+     * @return Formatted string
+     */
     public static String toString(OffsetDateTime offsetDateTime, Formatter formatter) {
         return toString(offsetDateTime.toLocalDateTime(), formatter);
     }
 
+    /**
+     * Format Temporal object to string with specified format
+     *
+     * @param temporal Date-time object
+     * @param formatter Date-time format enum
+     * @return Formatted string
+     */
     public static String toString(Temporal temporal, Formatter formatter) {
         if (temporal instanceof OffsetDateTime) {
             return toString(((OffsetDateTime) temporal).toLocalDateTime(), formatter);
@@ -330,12 +337,32 @@ public class DateTimeUtils {
         }
     }
 
+    /**
+     * Format timestamp to string with specified format
+     *
+     * @param timestamp Timestamp in milliseconds
+     * @param formatter Date-time format enum
+     * @return Formatted string
+     */
     public static String toString(long timestamp, Formatter formatter) {
         Instant instant = Instant.ofEpochMilli(timestamp);
         return toString(LocalDateTime.ofInstant(instant, ZoneId.systemDefault()), formatter);
     }
 
-    public enum Formatter {
+    /**
+     * Format timestamp to string with specified format string
+     *
+     * @param timestamp Timestamp in milliseconds
+     * @param format Date-time format string, e.g.: yyyy-MM-dd HH:mm:ss
+     * @return Formatted string
+     */
+    public static String toString(long timestamp, String format) {
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        return toString(LocalDateTime.ofInstant(instant, ZoneId.systemDefault()), format);
+    }
+
+    @Getter
+    public enum Formatter implements org.apache.seatunnel.common.config.Formatter<Formatter> {
         YYYY_MM_DD_HH_MM_SS("yyyy-MM-dd HH:mm:ss"),
         YYYY_MM_DD_HH_MM_SS_SSSSSS("yyyy-MM-dd HH:mm:ss.SSSSSS"),
         YYYY_MM_DD_HH_MM_SS_SPOT("yyyy.MM.dd HH:mm:ss"),
@@ -356,10 +383,6 @@ public class DateTimeUtils {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
-
         public static Formatter parse(String format) {
             Formatter[] formatters = Formatter.values();
             for (Formatter formatter : formatters) {
@@ -369,6 +392,11 @@ public class DateTimeUtils {
             }
             String errorMsg = String.format("Illegal format [%s]", format);
             throw new IllegalArgumentException(errorMsg);
+        }
+
+        @Override
+        public Formatter getFormatter() {
+            return this;
         }
     }
 }
