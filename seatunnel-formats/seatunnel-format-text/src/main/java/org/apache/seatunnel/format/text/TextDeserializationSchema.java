@@ -48,8 +48,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -66,13 +64,6 @@ public class TextDeserializationSchema implements DeserializationSchema<SeaTunne
     private final FormatterConfig<DateUtils.Formatter> dateFormatterConfig;
     private final FormatterConfig<DateTimeUtils.Formatter> dateTimeFormatterConfig;
     private final FormatterConfig<TimeUtils.Formatter> timeFormatterConfig;
-
-    @SuppressWarnings("MagicNumber")
-    public static final DateTimeFormatter TIME_FORMAT =
-            new DateTimeFormatterBuilder()
-                    .appendPattern("HH:mm:ss")
-                    .appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true)
-                    .toFormatter();
 
     public Map<String, DateTimeFormatter> fieldFormatterMap = new HashMap<>();
 
@@ -354,7 +345,7 @@ public class TextDeserializationSchema implements DeserializationSchema<SeaTunne
             fieldFormatterMap.put(fieldName, dateFormatter);
         }
         if (dateFormatter == null) {
-            throw CommonError.formatTimeError(fieldValue, fieldName);
+            throw CommonError.formatDateError(fieldValue, fieldName);
         }
         return DateUtils.parse(fieldValue, dateFormatter);
     }
@@ -362,16 +353,17 @@ public class TextDeserializationSchema implements DeserializationSchema<SeaTunne
     private LocalTime parseTime(String fieldValue, String fieldName) {
         DateTimeFormatter timeFormatter = fieldFormatterMap.get(fieldName);
         if (timeFormatter == null) {
-            if (dateFormatterConfig.isUserConfigured()) {
-                DateUtils.Formatter formatter = dateFormatterConfig.getFormatter();
-                timeFormatter = DateTimeFormatter.ofPattern(formatter.getValue());
+            TimeUtils.Formatter formatter;
+            if (timeFormatterConfig.isUserConfigured()) {
+                formatter = timeFormatterConfig.getFormatter();
             } else {
-                timeFormatter = DateUtils.matchDateFormatter(fieldValue);
+                formatter = TimeUtils.matchTimeFormatter(fieldValue);
+                if (formatter == null) {
+                    throw CommonError.formatTimeError(fieldValue, fieldName);
+                }
             }
+            timeFormatter = DateTimeFormatter.ofPattern(formatter.getValue());
             fieldFormatterMap.put(fieldName, timeFormatter);
-        }
-        if (timeFormatter == null) {
-            throw CommonError.formatDateError(fieldValue, fieldName);
         }
         return TimeUtils.parse(fieldValue, timeFormatter);
     }

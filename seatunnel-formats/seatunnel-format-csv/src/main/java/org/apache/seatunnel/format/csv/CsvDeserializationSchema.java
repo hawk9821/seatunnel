@@ -359,16 +359,17 @@ public class CsvDeserializationSchema implements Serializable {
     private LocalTime parseTime(String fieldValue, String fieldName) {
         DateTimeFormatter timeFormatter = fieldFormatterMap.get(fieldName);
         if (timeFormatter == null) {
-            if (dateFormatterConfig.isUserConfigured()) {
-                DateUtils.Formatter formatter = dateFormatterConfig.getFormatter();
-                timeFormatter = DateTimeFormatter.ofPattern(formatter.getValue());
+            TimeUtils.Formatter formatter;
+            if (timeFormatterConfig.isUserConfigured()) {
+                formatter = timeFormatterConfig.getFormatter();
             } else {
-                timeFormatter = DateUtils.matchDateFormatter(fieldValue);
+                formatter = TimeUtils.matchTimeFormatter(fieldValue);
+                if (formatter == null) {
+                    throw CommonError.formatTimeError(fieldValue, fieldName);
+                }
             }
+            timeFormatter = DateTimeFormatter.ofPattern(formatter.getValue());
             fieldFormatterMap.put(fieldName, timeFormatter);
-        }
-        if (timeFormatter == null) {
-            throw CommonError.formatTimeError(fieldValue, fieldName);
         }
         return TimeUtils.parse(fieldValue, timeFormatter);
     }
@@ -385,11 +386,7 @@ public class CsvDeserializationSchema implements Serializable {
             fieldFormatterMap.put(fieldName, dateTimeFormatter);
         }
         if (dateTimeFormatter == null) {
-            throw new SeaTunnelCsvFormatException(
-                    CommonErrorCode.UNSUPPORTED_DATA_TYPE,
-                    String.format(
-                            "SeaTunnel can not parse this date format [%s] of fieldValue [%s]",
-                            fieldValue, fieldName));
+            throw CommonError.formatDateTimeError(fieldValue, fieldName);
         }
         return DateTimeUtils.parse(fieldValue, dateTimeFormatter);
     }
