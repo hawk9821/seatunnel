@@ -365,6 +365,7 @@ const sidebars = {
                 "developer/contribution-path",
                 "developer/coding-guide",
                 "developer/test-coding-guide",
+                "developer/shade-guide",
                 "developer/how-to-create-your-connector",
                 "developer/source-connector-development",
                 "developer/sink-connector-development",
