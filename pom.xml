@@ -789,6 +789,8 @@
                             <exclude>**/SqlserverJdbcRowConverterTest.java</exclude>
                             <!-- Dependency conflict: hadoop-shaded woodstox-core class not found -->
                             <exclude>**/IcebergStreamSplitEnumeratorTest.java</exclude>
+                            <!-- MiniKdc Kerberos realm initialization fails on JDK 17 -->
+                            <exclude>**/HadoopLoginFactoryTest.java</exclude>
                         </excludes>
                         <classpathDependencyExcludes>
                             <!--
