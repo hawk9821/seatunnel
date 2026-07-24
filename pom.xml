@@ -787,9 +787,6 @@
                             <!-- PowerMock tests incompatible with JDK 17 -->
                             <exclude>**/EmbeddingModelDimensionTest.java</exclude>
                             <exclude>**/SqlserverJdbcRowConverterTest.java</exclude>
-                            <!-- Mockito 4.x cannot mock HttpURLConnection static methods on JDK 17 -->
-                            <exclude>**/GravitinoClientTest.java</exclude>
-                            <exclude>**/DefaultSaveModeHandlerTest.java</exclude>
                         </excludes>
                         <classpathDependencyExcludes>
                             <!--
@@ -807,6 +804,8 @@
                             <classpathDependencyExclude>ch.qos.logback:logback-classic</classpathDependencyExclude>
                             <classpathDependencyExclude>ch.qos.logback:logback-core</classpathDependencyExclude>
                             <classpathDependencyExclude>org.apache.logging.log4j:log4j-to-slf4j</classpathDependencyExclude>
+                            <!-- Exclude PowerMock to avoid conflict with Mockito 5.x on JDK 17 -->
+                            <classpathDependencyExclude>org.powermock:powermock-api-mockito2</classpathDependencyExclude>
                         </classpathDependencyExcludes>
                     </configuration>
                 </plugin>
