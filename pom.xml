@@ -168,6 +168,8 @@
         <skipUT>false</skipUT>
         <skipIT>true</skipIT>
         <elasticsearch>7</elasticsearch>
+        <!-- Skip Spark translation tests: Spark 3.3.x is not compatible with JDK 17 -->
+        <skipSparkTests>false</skipSparkTests>
         <guava.version>27.0-jre</guava.version>
         <auto-service.version>1.0.1</auto-service.version>
         <hadoop2.version>2.6.5</hadoop2.version>
