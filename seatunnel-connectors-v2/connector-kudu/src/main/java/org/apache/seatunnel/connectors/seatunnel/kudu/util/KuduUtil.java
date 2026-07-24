@@ -29,7 +29,6 @@ import org.apache.seatunnel.connectors.seatunnel.kudu.exception.KuduConnectorExc
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.security.UserGroupInformation;
-import org.apache.hadoop.security.authentication.util.KerberosName;
 import org.apache.kudu.ColumnSchema;
 import org.apache.kudu.Schema;
 import org.apache.kudu.Type;
@@ -100,8 +99,7 @@ public class KuduUtil {
     private static void reloadKrb5conf(String krb5conf) {
         System.setProperty(KRB5_CONF_KEY, krb5conf);
         try {
-            ReflectionUtils.invokeStatic(
-                    Class.forName("sun.security.krb5.Config"), "refresh");
+            ReflectionUtils.invokeStatic(Class.forName("sun.security.krb5.Config"), "refresh");
             ReflectionUtils.invokeStatic(
                     Class.forName("sun.security.krb5.KerberosName"), "resetDefaultRealm");
         } catch (ClassNotFoundException e) {

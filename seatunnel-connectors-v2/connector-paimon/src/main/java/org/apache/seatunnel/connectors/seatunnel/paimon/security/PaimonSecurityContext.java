@@ -20,15 +20,14 @@ package org.apache.seatunnel.connectors.seatunnel.paimon.security;
 import org.apache.seatunnel.shade.com.google.common.collect.ImmutableList;
 import org.apache.seatunnel.shade.org.apache.commons.lang3.StringUtils;
 
+import org.apache.seatunnel.common.utils.ReflectionUtils;
 import org.apache.seatunnel.connectors.seatunnel.paimon.config.PaimonConfig;
 import org.apache.seatunnel.connectors.seatunnel.paimon.config.PaimonHadoopConfiguration;
 import org.apache.seatunnel.connectors.seatunnel.paimon.exception.PaimonConnectorErrorCode;
 import org.apache.seatunnel.connectors.seatunnel.paimon.exception.PaimonConnectorException;
-import org.apache.seatunnel.common.utils.ReflectionUtils;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.security.authentication.util.KerberosName;
 import org.apache.paimon.catalog.CatalogContext;
 import org.apache.paimon.options.Options;
 import org.apache.paimon.security.SecurityConfiguration;
@@ -140,8 +139,7 @@ public class PaimonSecurityContext extends SecurityContext {
     private static void reloadKrb5conf(String krb5conf) {
         System.setProperty(KRB5_CONF_KEY, krb5conf);
         try {
-            ReflectionUtils.invokeStatic(
-                    Class.forName("sun.security.krb5.Config"), "refresh");
+            ReflectionUtils.invokeStatic(Class.forName("sun.security.krb5.Config"), "refresh");
             ReflectionUtils.invokeStatic(
                     Class.forName("sun.security.krb5.KerberosName"), "resetDefaultRealm");
         } catch (ClassNotFoundException e) {
