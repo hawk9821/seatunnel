@@ -26,8 +26,8 @@
     <name>SeaTunnel : Formats : Protobuf</name>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <protobuf.version>3.25.3</protobuf.version>
         <protoc.jar.version>3.11.4</protoc.jar.version>

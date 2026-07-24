@@ -26,8 +26,8 @@
     <name>SeaTunnel : E2E : Connector V2 : TDengine</name>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
     <dependencies>
         <!-- SeaTunnel connectors -->
