@@ -74,6 +74,7 @@ public class Options {
         public TypedOptionBuilder<Long> longType() {
             return new TypedOptionBuilder<>(key, new TypeReference<Long>() {});
         }
+
         /** Defines that the value of the option should be of {@link BigDecimal} type. */
         public TypedOptionBuilder<BigDecimal> bigDecimalType() {
             return new TypedOptionBuilder<>(key, new TypeReference<BigDecimal>() {});

@@ -141,7 +141,9 @@ public class MilvusIT extends TestSuiteBase implements TestResource {
     }
 
     private void initMilvus()
-            throws SQLException, ClassNotFoundException, InstantiationException,
+            throws SQLException,
+                    ClassNotFoundException,
+                    InstantiationException,
                     IllegalAccessException {
         Map<String, Object> config = new HashMap<>();
         config.put(MilvusSinkOptions.URL.key(), this.container.getEndpoint());

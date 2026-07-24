@@ -32,7 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.Map;
 
-/** @deprecated instead by {@link TableSchemaChangeEventDispatcher} */
+/**
+ * @deprecated instead by {@link TableSchemaChangeEventDispatcher}
+ */
 @Deprecated
 @Slf4j
 public class DataTypeChangeEventDispatcher implements DataTypeChangeEventHandler {

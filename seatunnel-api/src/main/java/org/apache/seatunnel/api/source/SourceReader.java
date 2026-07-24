@@ -87,10 +87,14 @@ public interface SourceReader<T, SplitT extends SourceSplit>
 
     interface Context {
 
-        /** @return The index of this subtask. */
+        /**
+         * @return The index of this subtask.
+         */
         int getIndexOfSubtask();
 
-        /** @return boundedness of this reader. */
+        /**
+         * @return boundedness of this reader.
+         */
         Boundedness getBoundedness();
 
         /** Indicator that the input has reached the end of data. Then will cancel this reader. */
@@ -110,7 +114,9 @@ public interface SourceReader<T, SplitT extends SourceSplit>
          */
         void sendSourceEventToEnumerator(SourceEvent sourceEvent);
 
-        /** @return metricsContext of this reader. */
+        /**
+         * @return metricsContext of this reader.
+         */
         MetricsContext getMetricsContext();
 
         /**

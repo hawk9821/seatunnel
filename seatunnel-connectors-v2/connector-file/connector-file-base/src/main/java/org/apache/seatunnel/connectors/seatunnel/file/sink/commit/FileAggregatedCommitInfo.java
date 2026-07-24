@@ -28,6 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FileAggregatedCommitInfo implements Serializable {
     private static final long serialVersionUID = 8035568366654544907L;
+
     /**
      * Storage the commit info in map.
      *

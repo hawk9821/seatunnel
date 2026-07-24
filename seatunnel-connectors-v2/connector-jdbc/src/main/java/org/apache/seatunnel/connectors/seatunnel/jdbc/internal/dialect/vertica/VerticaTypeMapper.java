@@ -162,7 +162,7 @@ public class VerticaTypeMapper implements JdbcDialectTypeMapper {
             case VERTICA_BINARY:
                 return PrimitiveByteArrayType.INSTANCE;
 
-                // Doesn't support yet
+            // Doesn't support yet
             case VERTICA_GEOMETRY:
             case VERTICA_UNKNOWN:
             default:

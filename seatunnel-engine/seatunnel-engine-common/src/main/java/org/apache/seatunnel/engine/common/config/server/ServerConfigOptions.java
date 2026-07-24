@@ -137,6 +137,7 @@ public class ServerConfigOptions {
                     .type(new TypeReference<MetadataConfig>() {})
                     .defaultValue(new MetadataConfig())
                     .withDescription("The MetaData Center configuration.");
+
     // The options for metrics end
     /////////////////////////////////////////////////
 

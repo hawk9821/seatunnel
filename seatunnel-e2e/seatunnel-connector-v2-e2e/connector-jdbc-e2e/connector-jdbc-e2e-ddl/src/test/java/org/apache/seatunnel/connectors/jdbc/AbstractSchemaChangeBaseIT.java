@@ -78,16 +78,19 @@ public abstract class AbstractSchemaChangeBaseIT extends TestSuiteBase implement
 
     private static final String SOURCE_DATABASE = "shop";
     private static final String SOURCE_TABLE = "products";
+
     /**
      * Deterministic source row used to prove the MySQL CDC reader is consuming binlog events before
      * schema-change DDL is executed.
      */
     private static final int STREAM_READY_MARKER_ID = 1000;
+
     /**
      * Marker value written to the source table so sink-side readiness polling can identify the
      * probe row without depending on connector internals.
      */
     private static final String STREAM_READY_MARKER_NAME = "__cdc_stream_ready__";
+
     /**
      * Stable payload for the readiness probe row; keeping it constant makes repeated test attempts
      * idempotent through the upsert statement.

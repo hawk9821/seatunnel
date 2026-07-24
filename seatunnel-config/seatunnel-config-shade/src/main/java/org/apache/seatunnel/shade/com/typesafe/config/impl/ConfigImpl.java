@@ -98,14 +98,16 @@ public class ConfigImpl {
         public ConfigParseable nameToParseable(String name, ConfigParseOptions parseOptions) {
             return Parseable.newFile(new File(name), parseOptions);
         }
-    };
+    }
+    ;
 
     static class ClasspathNameSource implements SimpleIncluder.NameSource {
         @Override
         public ConfigParseable nameToParseable(String name, ConfigParseOptions parseOptions) {
             return Parseable.newResources(name, parseOptions);
         }
-    };
+    }
+    ;
 
     static class ClasspathNameSourceWithClass implements SimpleIncluder.NameSource {
         private final Class<?> klass;
@@ -118,7 +120,8 @@ public class ConfigImpl {
         public ConfigParseable nameToParseable(String name, ConfigParseOptions parseOptions) {
             return Parseable.newResources(klass, name, parseOptions);
         }
-    };
+    }
+    ;
 
     public static ConfigObject parseResourcesAnySyntax(
             Class<?> klass, String resourceBasename, ConfigParseOptions baseOptions) {

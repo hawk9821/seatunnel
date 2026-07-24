@@ -66,7 +66,7 @@ public class TablestoreTypeMapper implements JdbcDialectTypeMapper {
             case TABLESTORE_VARBINARY:
             case TABLESTORE_MEDIUMBLOB:
                 return PrimitiveByteArrayType.INSTANCE;
-                // Doesn't support yet
+            // Doesn't support yet
             case TABLESTORE_UNKNOWN:
             default:
                 final String jdbcColumnName = metadata.getColumnName(colIndex);

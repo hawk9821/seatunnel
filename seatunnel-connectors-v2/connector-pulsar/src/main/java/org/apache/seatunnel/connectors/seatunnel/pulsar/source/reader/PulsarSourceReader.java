@@ -77,6 +77,7 @@ public class PulsarSourceReader<T> implements SourceReader<T, PulsarPartitionSpl
     protected final int batchSize;
 
     protected PulsarClient pulsarClient;
+
     /** Indicating whether the SourceReader will be assigned more splits or not. */
     private boolean noMoreSplitsAssignment = false;
 

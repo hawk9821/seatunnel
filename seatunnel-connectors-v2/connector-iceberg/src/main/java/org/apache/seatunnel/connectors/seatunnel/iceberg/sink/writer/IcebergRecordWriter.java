@@ -151,6 +151,7 @@ public class IcebergRecordWriter implements RecordWriter {
             updates.changeColumn(oldColumn, column.getName());
         }
     }
+
     /** apply schema update */
     private void applySchemaUpdate(SchemaChangeWrapper updates) {
         // complete the current file

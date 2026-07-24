@@ -77,6 +77,7 @@ public class HttpSourceReader extends AbstractSingleSplitReader<SeaTunnelRow> {
     private Optional<PageInfo> pageInfoOptional = Optional.empty();
     private final boolean binaryMode;
     private final long binaryChunkSize;
+
     /**
      * Holds the original request body template for placeholder replacement. This ensures that the
      * state is not unintentionally mutated during pagination.

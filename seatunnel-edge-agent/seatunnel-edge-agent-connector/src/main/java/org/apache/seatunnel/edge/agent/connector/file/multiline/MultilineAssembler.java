@@ -140,12 +140,16 @@ public class MultilineAssembler {
         return flushed;
     }
 
-    /** @return {@code true} if there are lines waiting for a boundary or {@code flush()} */
+    /**
+     * @return {@code true} if there are lines waiting for a boundary or {@code flush()}
+     */
     public boolean hasPending() {
         return !buffer.isEmpty();
     }
 
-    /** @return timestamp of the first buffered line, or 0 if buffer is empty */
+    /**
+     * @return timestamp of the first buffered line, or 0 if buffer is empty
+     */
     public long getBufferFirstTimestamp() {
         return buffer.isEmpty() ? 0L : buffer.get(0).getTs();
     }

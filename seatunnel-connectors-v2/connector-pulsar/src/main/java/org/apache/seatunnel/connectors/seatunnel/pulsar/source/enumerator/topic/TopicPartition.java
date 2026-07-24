@@ -30,6 +30,7 @@ public class TopicPartition implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int hash = 0;
+
     /**
      * The topic name of the pulsar. It would be a full topic name, if your don't provide the tenant
      * and namespace, we would add them automatically.

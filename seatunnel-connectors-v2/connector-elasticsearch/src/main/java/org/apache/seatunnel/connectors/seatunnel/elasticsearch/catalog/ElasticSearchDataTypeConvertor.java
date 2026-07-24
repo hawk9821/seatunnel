@@ -30,7 +30,9 @@ import java.util.Map;
 
 import static org.apache.seatunnel.shade.com.google.common.base.Preconditions.checkNotNull;
 
-/** @deprecated instead by {@link ElasticSearchTypeConverter} */
+/**
+ * @deprecated instead by {@link ElasticSearchTypeConverter}
+ */
 @Deprecated
 @AutoService(DataTypeConvertor.class)
 public class ElasticSearchDataTypeConvertor implements DataTypeConvertor<String> {

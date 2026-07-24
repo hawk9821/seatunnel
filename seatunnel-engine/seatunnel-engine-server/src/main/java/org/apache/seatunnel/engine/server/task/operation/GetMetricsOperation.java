@@ -42,6 +42,7 @@ import static org.apache.seatunnel.api.common.metrics.MetricTags.JOB_ID;
 public class GetMetricsOperation extends Operation implements IdentifiedDataSerializable {
     private RawJobMetrics response;
     private Set<Long> runningJobIds;
+
     /** Optional metric name prefixes for filtering (e.g. "intermediate_queue_"). */
     private String[] metricNamePrefixes;
 

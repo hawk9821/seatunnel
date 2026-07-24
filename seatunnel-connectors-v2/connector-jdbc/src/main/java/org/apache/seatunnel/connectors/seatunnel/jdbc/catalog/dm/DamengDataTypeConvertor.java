@@ -37,7 +37,9 @@ import static org.apache.seatunnel.connectors.seatunnel.jdbc.internal.dialect.dm
 import static org.apache.seatunnel.connectors.seatunnel.jdbc.internal.dialect.dm.DmdbTypeConverter.DM_NUMBER;
 import static org.apache.seatunnel.connectors.seatunnel.jdbc.internal.dialect.dm.DmdbTypeConverter.DM_NUMERIC;
 
-/** @deprecated instead by {@link DmdbTypeConverter} */
+/**
+ * @deprecated instead by {@link DmdbTypeConverter}
+ */
 @Deprecated
 @AutoService(DataTypeConvertor.class)
 public class DamengDataTypeConvertor implements DataTypeConvertor<String> {

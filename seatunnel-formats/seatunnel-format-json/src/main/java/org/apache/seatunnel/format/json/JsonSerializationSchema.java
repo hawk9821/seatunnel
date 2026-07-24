@@ -38,6 +38,7 @@ import static org.apache.seatunnel.shade.com.google.common.base.Preconditions.ch
 public class JsonSerializationSchema implements SerializationSchema {
 
     public static final String FORMAT = "Common";
+
     /** RowType to generate the runtime converter. */
     private final SeaTunnelRowType rowType;
 

@@ -26,6 +26,7 @@ public class IntermediateQueue implements Serializable {
     private final long id;
     private final int parallelism;
     private final String name;
+
     /** 0 means use default capacity decided by engine runtime. */
     private final int capacity;
 

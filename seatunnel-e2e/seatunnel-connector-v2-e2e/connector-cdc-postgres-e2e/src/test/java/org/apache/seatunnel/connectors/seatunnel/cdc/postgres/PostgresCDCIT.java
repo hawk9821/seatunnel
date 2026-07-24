@@ -130,6 +130,7 @@ public class PostgresCDCIT extends TestSuiteBase implements TestResource {
 
     private static final String SOURCE_SQL_TEMPLATE = "select * from %s.%s order by id";
     private static final String GENERATED_SLOT_PREFIX = "seatunnel_";
+
     /**
      * Debezium JSON change events can lag under CI load, so snapshot and DML record waits use the
      * same timeout budget.
@@ -255,6 +256,7 @@ public class PostgresCDCIT extends TestSuiteBase implements TestResource {
             System.err.println("Error creating topic: " + e.getMessage());
         }
     }
+
     // Initialize the kafka Consumer
 
     private Properties kafkaConsumerConfig() {

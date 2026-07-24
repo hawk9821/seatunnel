@@ -34,7 +34,9 @@ public enum EdgeSocketCompressionType {
         this.value = value;
     }
 
-    /** @return canonical option value used in configs and packet fields */
+    /**
+     * @return canonical option value used in configs and packet fields
+     */
     public String getValue() {
         return value;
     }

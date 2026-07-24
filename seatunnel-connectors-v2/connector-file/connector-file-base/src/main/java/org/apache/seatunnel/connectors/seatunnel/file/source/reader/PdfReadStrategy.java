@@ -989,7 +989,9 @@ public class PdfReadStrategy extends AbstractReadStrategy {
         private final PDDocument document;
         @Getter private List<CoordinateInfo> imagesCoordinates = new ArrayList<>();
 
-        /** @throws IOException If there is an error loading text stripper properties. */
+        /**
+         * @throws IOException If there is an error loading text stripper properties.
+         */
         public PdfImageExtractor(PDDocument document) throws IOException {
             this.document = document;
         }

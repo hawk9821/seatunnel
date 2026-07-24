@@ -47,7 +47,9 @@ public interface SinkWriter<T, CommitInfoT, StateT> {
      */
     void write(T element) throws IOException;
 
-    /** @deprecated instead by {@link SupportSchemaEvolutionSinkWriter} TODO: remove this method */
+    /**
+     * @deprecated instead by {@link SupportSchemaEvolutionSinkWriter} TODO: remove this method
+     */
     @Deprecated
     default void applySchemaChange(SchemaChangeEvent event) throws IOException {}
 
@@ -101,15 +103,21 @@ public interface SinkWriter<T, CommitInfoT, StateT> {
 
     interface Context extends Serializable {
 
-        /** @return The index of this subtask. */
+        /**
+         * @return The index of this subtask.
+         */
         int getIndexOfSubtask();
 
-        /** @return parallelism of this writer. */
+        /**
+         * @return parallelism of this writer.
+         */
         default int getNumberOfParallelSubtasks() {
             return 1;
         }
 
-        /** @return metricsContext of this reader. */
+        /**
+         * @return metricsContext of this reader.
+         */
         MetricsContext getMetricsContext();
 
         /**

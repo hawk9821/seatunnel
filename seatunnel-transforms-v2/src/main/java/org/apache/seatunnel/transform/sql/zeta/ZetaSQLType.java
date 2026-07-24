@@ -513,7 +513,7 @@ public class ZetaSQLType {
             case ZetaSQLFunction.MOD:
                 // Result has the same type as second argument
                 return getExpressionType(function.getParameters().getExpressions().get(1));
-                // Vector functions
+            // Vector functions
             case ZetaSQLFunction.VECTOR_REDUCE:
             case ZetaSQLFunction.VECTOR_NORMALIZE:
                 return VectorType.VECTOR_FLOAT_TYPE;

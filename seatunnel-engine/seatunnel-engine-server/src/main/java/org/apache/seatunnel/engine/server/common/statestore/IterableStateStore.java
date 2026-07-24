@@ -35,10 +35,14 @@ import java.util.Set;
  */
 public interface IterableStateStore<K, V> extends StateStore<K, V> {
 
-    /** @return all stored entries */
+    /**
+     * @return all stored entries
+     */
     Set<Map.Entry<K, V>> entrySet();
 
-    /** @return all stored values */
+    /**
+     * @return all stored values
+     */
     Collection<V> values();
 
     /**

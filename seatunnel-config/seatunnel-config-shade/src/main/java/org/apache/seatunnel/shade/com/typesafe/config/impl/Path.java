@@ -65,12 +65,16 @@ final class Path {
         return first;
     }
 
-    /** @return path minus the first element or null if no more elements */
+    /**
+     * @return path minus the first element or null if no more elements
+     */
     Path remainder() {
         return remainder;
     }
 
-    /** @return path minus the last element or null if we have just one element */
+    /**
+     * @return path minus the last element or null if we have just one element
+     */
     Path parent() {
         if (remainder == null) {
             return null;
@@ -85,7 +89,9 @@ final class Path {
         return pb.result();
     }
 
-    /** @return last element in the path */
+    /**
+     * @return last element in the path
+     */
     String last() {
         Path p = this;
         while (p.remainder != null) {

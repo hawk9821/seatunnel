@@ -295,7 +295,8 @@ public class XuguCatalog extends AbstractJdbcCatalog {
                                                         constraintKey.getConstraintType(),
                                                         constraintKey.getConstraintName(),
                                                         constraintKey.getColumnNames() != null
-                                                                ? constraintKey.getColumnNames()
+                                                                ? constraintKey
+                                                                        .getColumnNames()
                                                                         .stream()
                                                                         .filter(Objects::nonNull)
                                                                         .map(

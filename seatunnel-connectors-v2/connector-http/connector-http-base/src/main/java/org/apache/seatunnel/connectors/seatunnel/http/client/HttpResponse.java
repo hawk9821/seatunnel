@@ -26,6 +26,7 @@ public class HttpResponse implements Serializable {
     private static final long serialVersionUID = 2168152194164783950L;
 
     public static final int STATUS_OK = HttpStatus.SC_OK;
+
     /** response status code */
     private int code;
 

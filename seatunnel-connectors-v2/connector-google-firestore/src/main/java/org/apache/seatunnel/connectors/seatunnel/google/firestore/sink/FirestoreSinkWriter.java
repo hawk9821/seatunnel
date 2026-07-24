@@ -55,8 +55,7 @@ public class FirestoreSinkWriter extends AbstractSinkWriter<SeaTunnelRow, Void> 
             credentials = GoogleCredentials.getApplicationDefault();
         }
         FirestoreOptions firestoreOptions =
-                FirestoreOptions.getDefaultInstance()
-                        .toBuilder()
+                FirestoreOptions.getDefaultInstance().toBuilder()
                         .setProjectId(parameters.getProjectId())
                         .setCredentials(credentials)
                         .build();

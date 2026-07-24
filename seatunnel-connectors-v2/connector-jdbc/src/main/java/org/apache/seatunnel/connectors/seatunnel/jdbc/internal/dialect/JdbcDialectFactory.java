@@ -32,6 +32,7 @@ public interface JdbcDialectFactory {
      * @return the name of the dialect
      */
     String dialectFactoryName();
+
     /**
      * Retrieves whether the dialect thinks that it can open a connection to the given URL.
      * Typically, dialects will return <code>true</code> if they understand the sub-protocol
@@ -43,7 +44,9 @@ public interface JdbcDialectFactory {
      */
     boolean acceptsURL(String url);
 
-    /** @return Creates a new instance of the {@link JdbcDialect}. */
+    /**
+     * @return Creates a new instance of the {@link JdbcDialect}.
+     */
     JdbcDialect create();
 
     /**

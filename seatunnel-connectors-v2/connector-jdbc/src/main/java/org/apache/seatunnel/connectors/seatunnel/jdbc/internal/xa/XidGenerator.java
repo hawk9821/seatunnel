@@ -32,7 +32,9 @@ public interface XidGenerator extends Serializable, AutoCloseable {
 
     default void open() {}
 
-    /** @return true if the provided transaction belongs to this subtask */
+    /**
+     * @return true if the provided transaction belongs to this subtask
+     */
     boolean belongsToSubtask(Xid xid, JobContext context, SinkWriter.Context sinkContext);
 
     @Override

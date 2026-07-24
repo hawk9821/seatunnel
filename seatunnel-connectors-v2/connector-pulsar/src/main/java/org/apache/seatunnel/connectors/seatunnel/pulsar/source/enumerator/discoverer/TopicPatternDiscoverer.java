@@ -60,10 +60,7 @@ public class TopicPatternDiscoverer implements PulsarDiscoverer {
     public Set<TopicPartition> getSubscribedTopicPartitions(PulsarAdmin pulsarAdmin) {
         LOG.debug("Fetching descriptions for all topics on pulsar cluster");
         try {
-            return pulsarAdmin
-                    .namespaces()
-                    .getTopics(namespace)
-                    .parallelStream()
+            return pulsarAdmin.namespaces().getTopics(namespace).parallelStream()
                     .filter(this::matchesSubscriptionMode)
                     .filter(topic -> topicPattern.matcher(topic).matches())
                     .map(

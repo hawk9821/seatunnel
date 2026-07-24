@@ -35,6 +35,7 @@ public abstract class AbstractConfiguration {
     protected static final String DISABLE_CACHE_DEFAULT_VALUE = "TRUE";
 
     protected static final String DISABLE_CACHE_KEY = "disable.cache";
+
     /**
      * check the configuration keys
      *

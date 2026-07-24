@@ -38,7 +38,9 @@ class CopyManagerProxy {
     Method copyInMethod;
 
     CopyManagerProxy(Connection connection)
-            throws NoSuchMethodException, InvocationTargetException, IllegalAccessException,
+            throws NoSuchMethodException,
+                    InvocationTargetException,
+                    IllegalAccessException,
                     SQLException {
         LOG.info("Proxy connection class: {}", connection.getClass().getName());
         this.connection = connection.unwrap(Connection.class);

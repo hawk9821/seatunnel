@@ -36,7 +36,8 @@ public interface SinkAggregatedCommitter<CommitInfoT, AggregatedCommitInfoT> ext
      * init sink aggregated committer, this method will be called not once. Each retry will call
      * this.
      */
-    default void init() {};
+    default void init() {}
+    ;
 
     /** Re-commit message to third party data receiver, The method need to achieve idempotency. */
     default List<AggregatedCommitInfoT> restoreCommit(

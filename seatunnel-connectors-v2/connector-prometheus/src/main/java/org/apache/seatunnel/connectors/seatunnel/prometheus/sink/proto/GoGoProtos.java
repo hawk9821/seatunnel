@@ -103,6 +103,7 @@ public final class GoGoProtos {
     }
 
     public static final int GOPROTO_ENUM_PREFIX_FIELD_NUMBER = 62001;
+
     /** <code>extend .google.protobuf.EnumOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.EnumOptions, Boolean>
@@ -111,6 +112,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_ENUM_STRINGER_FIELD_NUMBER = 62021;
+
     /** <code>extend .google.protobuf.EnumOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.EnumOptions, Boolean>
@@ -119,6 +121,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int ENUM_STRINGER_FIELD_NUMBER = 62022;
+
     /** <code>extend .google.protobuf.EnumOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.EnumOptions, Boolean>
@@ -127,6 +130,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int ENUM_CUSTOMNAME_FIELD_NUMBER = 62023;
+
     /** <code>extend .google.protobuf.EnumOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.EnumOptions, String>
@@ -135,6 +139,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int ENUMDECL_FIELD_NUMBER = 62024;
+
     /** <code>extend .google.protobuf.EnumOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.EnumOptions, Boolean>
@@ -143,6 +148,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int ENUMVALUE_CUSTOMNAME_FIELD_NUMBER = 66001;
+
     /** <code>extend .google.protobuf.EnumValueOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.EnumValueOptions, String>
@@ -151,6 +157,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int GOPROTO_GETTERS_ALL_FIELD_NUMBER = 63001;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -159,6 +166,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_ENUM_PREFIX_ALL_FIELD_NUMBER = 63002;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -167,6 +175,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_STRINGER_ALL_FIELD_NUMBER = 63003;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -175,6 +184,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int VERBOSE_EQUAL_ALL_FIELD_NUMBER = 63004;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -183,6 +193,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int FACE_ALL_FIELD_NUMBER = 63005;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -191,6 +202,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOSTRING_ALL_FIELD_NUMBER = 63006;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -199,6 +211,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int POPULATE_ALL_FIELD_NUMBER = 63007;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -207,6 +220,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int STRINGER_ALL_FIELD_NUMBER = 63008;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -215,6 +229,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int ONLYONE_ALL_FIELD_NUMBER = 63009;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -223,6 +238,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int EQUAL_ALL_FIELD_NUMBER = 63013;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -231,6 +247,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int DESCRIPTION_ALL_FIELD_NUMBER = 63014;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -239,6 +256,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int TESTGEN_ALL_FIELD_NUMBER = 63015;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -247,6 +265,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int BENCHGEN_ALL_FIELD_NUMBER = 63016;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -255,6 +274,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int MARSHALER_ALL_FIELD_NUMBER = 63017;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -263,6 +283,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int UNMARSHALER_ALL_FIELD_NUMBER = 63018;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -271,6 +292,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int STABLE_MARSHALER_ALL_FIELD_NUMBER = 63019;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -279,6 +301,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int SIZER_ALL_FIELD_NUMBER = 63020;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -287,6 +310,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_ENUM_STRINGER_ALL_FIELD_NUMBER = 63021;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -295,6 +319,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int ENUM_STRINGER_ALL_FIELD_NUMBER = 63022;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -303,6 +328,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int UNSAFE_MARSHALER_ALL_FIELD_NUMBER = 63023;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -311,6 +337,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int UNSAFE_UNMARSHALER_ALL_FIELD_NUMBER = 63024;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -319,6 +346,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_EXTENSIONS_MAP_ALL_FIELD_NUMBER = 63025;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -327,6 +355,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_UNRECOGNIZED_ALL_FIELD_NUMBER = 63026;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -335,6 +364,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOGOPROTO_IMPORT_FIELD_NUMBER = 63027;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -343,6 +373,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int PROTOSIZER_ALL_FIELD_NUMBER = 63028;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -351,6 +382,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int COMPARE_ALL_FIELD_NUMBER = 63029;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -359,6 +391,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int TYPEDECL_ALL_FIELD_NUMBER = 63030;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -367,6 +400,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int ENUMDECL_ALL_FIELD_NUMBER = 63031;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -375,6 +409,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_REGISTRATION_FIELD_NUMBER = 63032;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -383,6 +418,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int MESSAGENAME_ALL_FIELD_NUMBER = 63033;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -391,6 +427,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_SIZECACHE_ALL_FIELD_NUMBER = 63034;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -399,6 +436,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_UNKEYED_ALL_FIELD_NUMBER = 63035;
+
     /** <code>extend .google.protobuf.FileOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FileOptions, Boolean>
@@ -407,6 +445,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_GETTERS_FIELD_NUMBER = 64001;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -415,6 +454,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_STRINGER_FIELD_NUMBER = 64003;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -423,6 +463,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int VERBOSE_EQUAL_FIELD_NUMBER = 64004;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -431,6 +472,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int FACE_FIELD_NUMBER = 64005;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -439,6 +481,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOSTRING_FIELD_NUMBER = 64006;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -447,6 +490,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int POPULATE_FIELD_NUMBER = 64007;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -455,6 +499,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int STRINGER_FIELD_NUMBER = 67008;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -463,6 +508,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int ONLYONE_FIELD_NUMBER = 64009;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -471,6 +517,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int EQUAL_FIELD_NUMBER = 64013;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -479,6 +526,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int DESCRIPTION_FIELD_NUMBER = 64014;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -487,6 +535,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int TESTGEN_FIELD_NUMBER = 64015;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -495,6 +544,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int BENCHGEN_FIELD_NUMBER = 64016;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -503,6 +553,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int MARSHALER_FIELD_NUMBER = 64017;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -511,6 +562,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int UNMARSHALER_FIELD_NUMBER = 64018;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -519,6 +571,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int STABLE_MARSHALER_FIELD_NUMBER = 64019;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -527,6 +580,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int SIZER_FIELD_NUMBER = 64020;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -535,6 +589,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int UNSAFE_MARSHALER_FIELD_NUMBER = 64023;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -543,6 +598,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int UNSAFE_UNMARSHALER_FIELD_NUMBER = 64024;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -551,6 +607,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_EXTENSIONS_MAP_FIELD_NUMBER = 64025;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -559,6 +616,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_UNRECOGNIZED_FIELD_NUMBER = 64026;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -567,6 +625,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int PROTOSIZER_FIELD_NUMBER = 64028;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -575,6 +634,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int COMPARE_FIELD_NUMBER = 64029;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -583,6 +643,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int TYPEDECL_FIELD_NUMBER = 64030;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -591,6 +652,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int MESSAGENAME_FIELD_NUMBER = 64033;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -599,6 +661,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_SIZECACHE_FIELD_NUMBER = 64034;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -607,6 +670,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int GOPROTO_UNKEYED_FIELD_NUMBER = 64035;
+
     /** <code>extend .google.protobuf.MessageOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.MessageOptions, Boolean>
@@ -615,6 +679,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int NULLABLE_FIELD_NUMBER = 65001;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, Boolean>
@@ -623,6 +688,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int EMBED_FIELD_NUMBER = 65002;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, Boolean>
@@ -631,6 +697,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int CUSTOMTYPE_FIELD_NUMBER = 65003;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, String>
@@ -639,6 +706,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int CUSTOMNAME_FIELD_NUMBER = 65004;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, String>
@@ -647,6 +715,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int JSONTAG_FIELD_NUMBER = 65005;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, String>
@@ -655,6 +724,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int MORETAGS_FIELD_NUMBER = 65006;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, String>
@@ -663,6 +733,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int CASTTYPE_FIELD_NUMBER = 65007;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, String>
@@ -671,6 +742,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int CASTKEY_FIELD_NUMBER = 65008;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, String>
@@ -679,6 +751,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int CASTVALUE_FIELD_NUMBER = 65009;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, String>
@@ -687,6 +760,7 @@ public final class GoGoProtos {
                             String.class, null);
 
     public static final int STDTIME_FIELD_NUMBER = 65010;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, Boolean>
@@ -695,6 +769,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int STDDURATION_FIELD_NUMBER = 65011;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, Boolean>
@@ -703,6 +778,7 @@ public final class GoGoProtos {
                             Boolean.class, null);
 
     public static final int WKTPOINTER_FIELD_NUMBER = 65012;
+
     /** <code>extend .google.protobuf.FieldOptions { ... }</code> */
     public static final com.google.protobuf.GeneratedMessage.GeneratedExtension<
                     com.google.protobuf.DescriptorProtos.FieldOptions, Boolean>

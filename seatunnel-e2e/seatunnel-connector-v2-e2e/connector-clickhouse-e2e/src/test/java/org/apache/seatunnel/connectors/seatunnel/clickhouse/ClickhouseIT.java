@@ -530,7 +530,9 @@ public class ClickhouseIT extends TestSuiteBase implements TestResource {
     }
 
     private void initConnection()
-            throws SQLException, ClassNotFoundException, InstantiationException,
+            throws SQLException,
+                    ClassNotFoundException,
+                    InstantiationException,
                     IllegalAccessException {
         final Properties info = new Properties();
         info.put("user", this.container.getUsername());

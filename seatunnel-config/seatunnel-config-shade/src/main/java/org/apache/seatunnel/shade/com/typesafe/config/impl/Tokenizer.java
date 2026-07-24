@@ -56,6 +56,7 @@ final class Tokenizer {
             ConfigOrigin origin, Reader input, ConfigSyntax flavor, boolean acceptSpecialText) {
         return new TokenIterator(origin, input, flavor != ConfigSyntax.JSON, acceptSpecialText);
     }
+
     // End Add from SeaTunnel
 
     static String render(Iterator<Token> tokens) {
@@ -160,6 +161,7 @@ final class Tokenizer {
             this(origin, input, allowComments);
             this.acceptSpecialText = acceptSpecialText;
         }
+
         // End Add from SeaTunnel
 
         // this should ONLY be called from nextCharSkippingComments

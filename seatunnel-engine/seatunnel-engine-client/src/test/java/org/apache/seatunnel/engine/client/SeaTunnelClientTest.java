@@ -474,8 +474,14 @@ public class SeaTunnelClientTest {
                             .getLogicalDag();
             Assertions.assertIterableEquals(
                     Arrays.asList("file:/tmp/test.jar", "file:/tmp/test2.jar"),
-                    logicalDag.getLogicalVertexMap().values().iterator().next().getAction()
-                            .getJarUrls().stream()
+                    logicalDag
+                            .getLogicalVertexMap()
+                            .values()
+                            .iterator()
+                            .next()
+                            .getAction()
+                            .getJarUrls()
+                            .stream()
                             .map(URL::toString)
                             .collect(Collectors.toList()));
         }

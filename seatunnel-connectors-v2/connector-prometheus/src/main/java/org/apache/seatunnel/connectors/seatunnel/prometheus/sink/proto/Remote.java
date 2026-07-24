@@ -1522,6 +1522,7 @@ public final class Remote {
              * <code>SAMPLES = 0;</code>
              */
             public static final int SAMPLES_VALUE = 0;
+
             /**
              *
              *

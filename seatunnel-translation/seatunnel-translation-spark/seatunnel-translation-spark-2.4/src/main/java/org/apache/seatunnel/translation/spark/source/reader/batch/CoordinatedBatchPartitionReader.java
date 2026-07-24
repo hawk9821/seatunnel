@@ -76,9 +76,7 @@ public class CoordinatedBatchPartitionReader extends ParallelBatchPartitionReade
 
         @Override
         public void run(Collector<SeaTunnelRow> collector) throws Exception {
-            readerMap
-                    .entrySet()
-                    .parallelStream()
+            readerMap.entrySet().parallelStream()
                     .forEach(
                             entry -> {
                                 final AtomicBoolean flag = readerRunningMap.get(entry.getKey());

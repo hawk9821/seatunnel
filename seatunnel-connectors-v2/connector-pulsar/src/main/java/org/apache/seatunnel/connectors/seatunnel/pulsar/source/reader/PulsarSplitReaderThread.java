@@ -46,6 +46,7 @@ public class PulsarSplitReaderThread extends Thread implements Closeable {
     protected final PulsarPartitionSplit split;
     protected final PulsarClient pulsarClient;
     protected final PulsarConsumerConfig consumerConfig;
+
     /** The maximum number of milliseconds to wait for a fetch batch. */
     protected final int pollTimeout;
 

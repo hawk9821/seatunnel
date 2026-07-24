@@ -27,6 +27,7 @@ public class BigtableSourceState implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Set<BigtableSourceSplit> assignedSplits;
+
     /**
      * Splits returned via {@code addSplitsBack()} but not yet reassigned. Added in #11144; absent
      * (null) when an older checkpoint payload is deserialized with the same {@link

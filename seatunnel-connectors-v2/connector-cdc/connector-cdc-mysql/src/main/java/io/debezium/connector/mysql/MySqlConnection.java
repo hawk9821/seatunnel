@@ -72,6 +72,7 @@ public class MySqlConnection extends JdbcConnection {
     private final MySqlConnectionConfiguration connectionConfig;
     private final MySqlFieldReader mysqlFieldReader;
     private final String binaryLogStatusStatement;
+
     /**
      * Creates a new connection using the supplied configuration.
      *

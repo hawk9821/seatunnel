@@ -47,8 +47,10 @@ public class PaimonSinkConfig extends PaimonConfig {
     private final Boolean nonPrimaryKey;
     private final List<String> primaryKeys;
     private final List<String> partitionKeys;
+
     /** Runtime writer properties from {@code paimon.table.write-props} only. */
     private final Map<String, String> writeProps;
+
     /**
      * SaveMode auto-create options from {@code table_options}. Applied only when building the
      * Paimon schema for table creation; not merged into runtime {@link #writeProps}.

@@ -669,6 +669,7 @@ public class DebeziumJsonSerDeSchemaTest {
                         "{\"before\":{\"id\":111,\"name\":\"scooter\",\"description\":\"Big 2-wheel scooter \",\"weight\":5.17},\"after\":null,\"op\":\"d\",\"source\":{\"schema\":\"\",\"database\":\"\",\"table\":\"test\"},\"ts_ms\":1589362344455}");
         assertEquals(expected, actual);
     }
+
     // --------------------------------------------------------------------------------------------
     // Utilities
     // --------------------------------------------------------------------------------------------

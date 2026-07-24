@@ -26,6 +26,7 @@ import java.util.Map;
 public class KafkaBaseOptions extends ConnectorCommonOptions {
 
     public static final String CONNECTOR_IDENTITY = "Kafka";
+
     /** The default field delimiter is “,” */
     public static final String DEFAULT_FIELD_DELIMITER = ",";
 

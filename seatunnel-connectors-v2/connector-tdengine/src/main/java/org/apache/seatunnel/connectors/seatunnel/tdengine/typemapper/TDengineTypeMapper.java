@@ -143,7 +143,7 @@ public class TDengineTypeMapper {
             case TDENGINE_BINARY:
                 return PrimitiveByteArrayType.INSTANCE;
 
-                // Doesn't support yet
+            // Doesn't support yet
             case TDENGINE_GEOMETRY:
             case TDENGINE_UNKNOWN:
             default:

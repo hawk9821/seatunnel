@@ -74,7 +74,8 @@ public class PaimonAggregatedCommitter
                                         .flatMap(
                                                 paimonAggregatedCommitInfo ->
                                                         paimonAggregatedCommitInfo
-                                                                .getCommittablesMap().entrySet()
+                                                                .getCommittablesMap()
+                                                                .entrySet()
                                                                 .stream())
                                         .collect(
                                                 Collectors.toMap(
@@ -121,7 +122,8 @@ public class PaimonAggregatedCommitter
                                         .flatMap(
                                                 paimonAggregatedCommitInfo ->
                                                         paimonAggregatedCommitInfo
-                                                                .getCommittablesMap().entrySet()
+                                                                .getCommittablesMap()
+                                                                .entrySet()
                                                                 .stream())
                                         .collect(
                                                 Collectors.toMap(

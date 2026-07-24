@@ -28,7 +28,9 @@ import org.apache.seatunnel.connectors.seatunnel.sentry.config.SentrySinkOptions
 import java.io.IOException;
 import java.util.Optional;
 
-/** @description: SentrySink class */
+/**
+ * @description: SentrySink class
+ */
 public class SentrySink extends AbstractSimpleSink<SeaTunnelRow, Void> {
 
     private final ReadonlyConfig pluginConfig;

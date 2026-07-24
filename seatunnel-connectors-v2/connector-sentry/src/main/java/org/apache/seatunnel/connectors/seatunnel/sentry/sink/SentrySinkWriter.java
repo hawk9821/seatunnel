@@ -27,7 +27,9 @@ import io.sentry.SentryOptions;
 
 import java.io.IOException;
 
-/** @description: SentrySinkWriter class */
+/**
+ * @description: SentrySinkWriter class
+ */
 public class SentrySinkWriter extends AbstractSinkWriter<SeaTunnelRow, Void> {
 
     public SentrySinkWriter(ReadonlyConfig pluginConfig) {

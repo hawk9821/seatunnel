@@ -52,6 +52,7 @@ public class ObservabilityConfig {
     private final long bucketMs;
     private final int retentionMinutes;
     private final List<String> asyncBoundaries;
+
     /** Default capacity for async boundary queues, 0 means use engine default. */
     private final int edgeBufferCapacity;
 

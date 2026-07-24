@@ -111,7 +111,9 @@ public class MultiTableSinkAggregatedCommitter
                         commitInfos.stream()
                                 .flatMap(
                                         multiTableCommitInfo ->
-                                                multiTableCommitInfo.getCommitInfo().entrySet()
+                                                multiTableCommitInfo
+                                                        .getCommitInfo()
+                                                        .entrySet()
                                                         .stream()
                                                         .filter(
                                                                 m ->

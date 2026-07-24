@@ -48,6 +48,7 @@ public class RowDataToAvroConverters implements Serializable {
 
     private static final Conversions.DecimalConversion DECIMAL_CONVERSION =
             new Conversions.DecimalConversion();
+
     // --------------------------------------------------------------------------------
     // Runtime Converters
     // --------------------------------------------------------------------------------

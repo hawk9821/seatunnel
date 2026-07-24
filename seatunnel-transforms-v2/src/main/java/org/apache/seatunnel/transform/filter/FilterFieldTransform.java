@@ -58,9 +58,11 @@ public class FilterFieldTransform extends AbstractCatalogSupportMapTransform {
         excludeFields = config.get(FilterFieldTransformConfig.EXCLUDE_FIELDS);
         List<String> canNotFoundFields =
                 Stream.concat(
-                                Optional.ofNullable(includeFields).orElse(new ArrayList<>())
+                                Optional.ofNullable(includeFields)
+                                        .orElse(new ArrayList<>())
                                         .stream(),
-                                Optional.ofNullable(excludeFields).orElse(new ArrayList<>())
+                                Optional.ofNullable(excludeFields)
+                                        .orElse(new ArrayList<>())
                                         .stream())
                         .filter(field -> seaTunnelRowType.indexOf(field, false) == -1)
                         .collect(Collectors.toList());

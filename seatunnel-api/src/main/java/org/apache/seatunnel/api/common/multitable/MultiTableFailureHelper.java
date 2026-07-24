@@ -131,8 +131,10 @@ public final class MultiTableFailureHelper {
         if (options == null) {
             return Collections.emptyList();
         }
-        return options.getOptional(MultiTableCommonOptions.MULTI_TABLE_INITIAL_FAILED_TABLES)
-                .orElse(Collections.emptyList()).stream()
+        return options
+                .getOptional(MultiTableCommonOptions.MULTI_TABLE_INITIAL_FAILED_TABLES)
+                .orElse(Collections.emptyList())
+                .stream()
                 .map(MultiTableFailureHelper::deserializeFailedTable)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

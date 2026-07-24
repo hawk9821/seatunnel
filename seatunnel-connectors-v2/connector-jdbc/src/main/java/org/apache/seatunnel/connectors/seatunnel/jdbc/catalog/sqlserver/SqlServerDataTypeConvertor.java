@@ -34,7 +34,9 @@ import lombok.NonNull;
 
 import java.util.Map;
 
-/** @deprecated instead by {@link SqlServerTypeConverter} */
+/**
+ * @deprecated instead by {@link SqlServerTypeConverter}
+ */
 @Deprecated
 @AutoService(DataTypeConvertor.class)
 public class SqlServerDataTypeConvertor implements DataTypeConvertor<SqlServerType> {

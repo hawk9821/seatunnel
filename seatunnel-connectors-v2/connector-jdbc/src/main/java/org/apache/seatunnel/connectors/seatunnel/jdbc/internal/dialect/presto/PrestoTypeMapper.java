@@ -103,7 +103,7 @@ public class PrestoTypeMapper implements JdbcDialectTypeMapper {
             case PRESTO_VARBINARY:
             case PRESTO_BINARY:
                 return PrimitiveByteArrayType.INSTANCE;
-                // Doesn't support yet
+            // Doesn't support yet
             case PRESTO_MAP:
             case PRESTO_ARRAY:
             case PRESTO_ROW:

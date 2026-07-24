@@ -93,30 +93,41 @@ public class KafkaRecipeIT extends TestSuiteBase implements TestResource {
 
     /** Kafka image used by the documented recipe scenario. */
     private static final String KAFKA_IMAGE_NAME = "confluentinc/cp-kafka:7.0.9";
+
     /** Network alias referenced by the recipe config. */
     private static final String KAFKA_HOST = "kafkaCluster";
+
     /** MySQL hostname referenced by the recipe config. */
     private static final String MYSQL_HOST = "mysql_cdc_e2e";
+
     /** Source database consumed by the CDC job. */
     private static final String MYSQL_DATABASE = "shop";
+
     /** Application user used for DML verification. */
     private static final String MYSQL_USER_NAME = "mysqluser";
+
     /** Shared password for the MySQL test users. */
     private static final String MYSQL_USER_PASSWORD = "mysqlpw";
+
     /** Administrative MySQL user used to create the CDC account. */
     private static final String MYSQL_ROOT_USER_NAME = "root";
+
     /** CDC reader account configured inside the documented job. */
     private static final String MYSQL_CDC_USER_NAME = "st_user_source";
+
     /** Kafka topic populated by the documented sink config. */
     private static final String TOPIC_NAME = "recipe_mysql_orders";
+
     /** Driver JAR injected into the connector plugin before the job starts. */
     private static final String DRIVER_JAR =
             "https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.32/mysql-connector-j-8.0.32.jar";
 
     /** Kafka service used by the recipe job. */
     private KafkaContainer kafkaContainer;
+
     /** MySQL service used by the recipe job. */
     private MySqlContainer mysqlContainer;
+
     /** Helper that materializes the documented source table and seed rows. */
     private UniqueDatabase shopDatabase;
 

@@ -35,7 +35,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-/** @deprecated instead by {@link AlterTableSchemaEventHandler} */
+/**
+ * @deprecated instead by {@link AlterTableSchemaEventHandler}
+ */
 @Deprecated
 public class AlterTableEventHandler implements DataTypeChangeEventHandler {
     private SeaTunnelRowType dataType;

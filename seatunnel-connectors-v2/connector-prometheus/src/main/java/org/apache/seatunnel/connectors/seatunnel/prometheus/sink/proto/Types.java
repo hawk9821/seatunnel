@@ -160,18 +160,25 @@ public final class Types {
 
             /** <code>UNKNOWN = 0;</code> */
             public static final int UNKNOWN_VALUE = 0;
+
             /** <code>COUNTER = 1;</code> */
             public static final int COUNTER_VALUE = 1;
+
             /** <code>GAUGE = 2;</code> */
             public static final int GAUGE_VALUE = 2;
+
             /** <code>HISTOGRAM = 3;</code> */
             public static final int HISTOGRAM_VALUE = 3;
+
             /** <code>GAUGEHISTOGRAM = 4;</code> */
             public static final int GAUGEHISTOGRAM_VALUE = 4;
+
             /** <code>SUMMARY = 5;</code> */
             public static final int SUMMARY_VALUE = 5;
+
             /** <code>INFO = 6;</code> */
             public static final int INFO_VALUE = 6;
+
             /** <code>STATESET = 7;</code> */
             public static final int STATESET_VALUE = 7;
 
@@ -3612,6 +3619,7 @@ public final class Types {
              * <code>UNKNOWN = 0;</code>
              */
             public static final int UNKNOWN_VALUE = 0;
+
             /**
              *
              *
@@ -3622,6 +3630,7 @@ public final class Types {
              * <code>YES = 1;</code>
              */
             public static final int YES_VALUE = 1;
+
             /**
              *
              *
@@ -3632,6 +3641,7 @@ public final class Types {
              * <code>NO = 2;</code>
              */
             public static final int NO_VALUE = 2;
+
             /**
              *
              *
@@ -11960,10 +11970,13 @@ public final class Types {
 
             /** <code>EQ = 0;</code> */
             public static final int EQ_VALUE = 0;
+
             /** <code>NEQ = 1;</code> */
             public static final int NEQ_VALUE = 1;
+
             /** <code>RE = 2;</code> */
             public static final int RE_VALUE = 2;
+
             /** <code>NRE = 3;</code> */
             public static final int NRE_VALUE = 3;
 
@@ -14503,10 +14516,13 @@ public final class Types {
 
             /** <code>UNKNOWN = 0;</code> */
             public static final int UNKNOWN_VALUE = 0;
+
             /** <code>XOR = 1;</code> */
             public static final int XOR_VALUE = 1;
+
             /** <code>HISTOGRAM = 2;</code> */
             public static final int HISTOGRAM_VALUE = 2;
+
             /** <code>FLOAT_HISTOGRAM = 3;</code> */
             public static final int FLOAT_HISTOGRAM_VALUE = 3;
 

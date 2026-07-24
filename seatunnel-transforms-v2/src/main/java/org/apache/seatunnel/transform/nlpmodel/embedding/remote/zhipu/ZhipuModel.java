@@ -51,7 +51,8 @@ public class ZhipuModel extends AbstractModel {
     private final CloseableHttpClient client;
     private final String model;
     private final String apiKey;
-    private final String apiPath;;
+    private final String apiPath;
+    ;
     private final Integer dimension;
     private final Integer MAX_INPUT_SIZE = 64;
 

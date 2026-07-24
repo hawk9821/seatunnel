@@ -35,7 +35,9 @@ import java.util.Map;
 
 import static org.apache.seatunnel.shade.com.google.common.base.Preconditions.checkNotNull;
 
-/** @deprecated instead by {@link PostgresTypeConverter} */
+/**
+ * @deprecated instead by {@link PostgresTypeConverter}
+ */
 @Deprecated
 @AutoService(DataTypeConvertor.class)
 public class PostgresDataTypeConvertor implements DataTypeConvertor<String> {

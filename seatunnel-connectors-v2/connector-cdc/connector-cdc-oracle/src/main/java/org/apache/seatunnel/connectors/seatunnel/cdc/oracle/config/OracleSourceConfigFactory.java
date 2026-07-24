@@ -48,6 +48,7 @@ public class OracleSourceConfigFactory extends JdbcSourceConfigFactory {
     private Boolean useSelectCount;
 
     private Boolean skipAnalyze;
+
     /**
      * An optional list of regular expressions that match schema names to be monitored; any schema
      * name not included in the whitelist will be excluded from monitoring. By default all

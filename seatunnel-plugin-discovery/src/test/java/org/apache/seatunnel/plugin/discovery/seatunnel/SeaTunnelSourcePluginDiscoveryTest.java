@@ -213,7 +213,8 @@ class SeaTunnelSourcePluginDiscoveryTest {
                 PluginIdentifier.of("seatunnel", PluginType.SOURCE.getType(), "ClickHouse");
         SeaTunnelSourcePluginDiscovery discovery = new SeaTunnelSourcePluginDiscovery();
         List<String> jdbcAndClickHouseJars =
-                discovery.getPluginJarAndDependencyPaths(Lists.newArrayList(jdbc, clickhouse))
+                discovery
+                        .getPluginJarAndDependencyPaths(Lists.newArrayList(jdbc, clickhouse))
                         .stream()
                         .map(
                                 url -> {

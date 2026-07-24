@@ -98,7 +98,7 @@ public class Gbase8aTypeMapper implements JdbcDialectTypeMapper {
             case GBASE8A_BLOB:
             case GBASE8A_TEXT:
                 return PrimitiveByteArrayType.INSTANCE;
-                // Doesn't support yet
+            // Doesn't support yet
             case GBASE8A_UNKNOWN:
             default:
                 final String jdbcColumnName = metadata.getColumnName(colIndex);

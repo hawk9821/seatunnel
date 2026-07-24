@@ -23,12 +23,16 @@ import org.apache.seatunnel.common.exception.SeaTunnelRuntimeException;
 /** A MetaDataProvider-related, runtime exception. */
 public class MetadataProviderException extends SeaTunnelRuntimeException {
 
-    /** @param message the detail message. */
+    /**
+     * @param message the detail message.
+     */
     public MetadataProviderException(String message) {
         super(SeaTunnelAPIErrorCode.METADATA_PROVIDER_INITIALIZE_FAILED, message);
     }
 
-    /** @param cause the cause. */
+    /**
+     * @param cause the cause.
+     */
     public MetadataProviderException(Throwable cause) {
         super(SeaTunnelAPIErrorCode.METADATA_PROVIDER_INITIALIZE_FAILED, cause);
     }

@@ -707,6 +707,7 @@ public class CheckpointCoordinator {
             isAllTaskReady.set(false);
         }
     }
+
     /**
      * Attempts to trigger a pending checkpoint based on the given checkpoint type.
      *
@@ -1182,6 +1183,7 @@ public class CheckpointCoordinator {
             checkpointMonitorService.clearInProgress(jobId, pipelineId);
         }
     }
+
     /**
      * Processes a checkpoint acknowledgment from a task.
      *

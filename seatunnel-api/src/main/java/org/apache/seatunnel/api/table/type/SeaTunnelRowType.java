@@ -27,6 +27,7 @@ public class SeaTunnelRowType implements CompositeType<SeaTunnelRow> {
 
     /** The field name of the {@link SeaTunnelRow}. */
     private final String[] fieldNames;
+
     /** The type of the field. */
     private final SeaTunnelDataType<?>[] fieldTypes;
 

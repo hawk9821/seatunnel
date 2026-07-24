@@ -179,7 +179,7 @@ public class SinkAggregatedCommitterTask<CommandInfoT, AggregatedCommitInfoT>
             case CLOSED:
                 this.close();
                 return;
-                // TODO support cancel by outside
+            // TODO support cancel by outside
             case CANCELLING:
                 this.close();
                 currState = CANCELED;

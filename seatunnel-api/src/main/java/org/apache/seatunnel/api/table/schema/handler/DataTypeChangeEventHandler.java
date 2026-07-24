@@ -20,7 +20,9 @@ package org.apache.seatunnel.api.table.schema.handler;
 import org.apache.seatunnel.api.table.schema.event.SchemaChangeEvent;
 import org.apache.seatunnel.api.table.type.SeaTunnelRowType;
 
-/** @deprecated instead by {@link TableSchemaChangeEventHandler} */
+/**
+ * @deprecated instead by {@link TableSchemaChangeEventHandler}
+ */
 @Deprecated
 public interface DataTypeChangeEventHandler extends SchemaChangeEventHandler<SeaTunnelRowType> {
 

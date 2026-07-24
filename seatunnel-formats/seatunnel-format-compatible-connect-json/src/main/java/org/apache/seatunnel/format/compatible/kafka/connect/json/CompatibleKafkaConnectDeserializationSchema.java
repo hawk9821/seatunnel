@@ -70,6 +70,7 @@ public class CompatibleKafkaConnectDeserializationSchema
     private final JsonToRowConverters.JsonToObjectConverter runtimeConverter;
     private final boolean keySchemaEnable;
     private final boolean valueSchemaEnable;
+
     /** Object mapper for parsing the JSON. */
     private final ObjectMapper objectMapper = new ObjectMapper();
 

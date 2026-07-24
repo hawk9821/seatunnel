@@ -43,7 +43,9 @@ public class MultiTableSinkCommitter implements SinkCommitter<MultiTableCommitIn
                         commitInfos.stream()
                                 .flatMap(
                                         multiTableCommitInfo ->
-                                                multiTableCommitInfo.getCommitInfo().entrySet()
+                                                multiTableCommitInfo
+                                                        .getCommitInfo()
+                                                        .entrySet()
                                                         .stream()
                                                         .filter(
                                                                 entry ->
@@ -68,7 +70,9 @@ public class MultiTableSinkCommitter implements SinkCommitter<MultiTableCommitIn
                         commitInfos.stream()
                                 .flatMap(
                                         multiTableCommitInfo ->
-                                                multiTableCommitInfo.getCommitInfo().entrySet()
+                                                multiTableCommitInfo
+                                                        .getCommitInfo()
+                                                        .entrySet()
                                                         .stream()
                                                         .filter(
                                                                 entry ->

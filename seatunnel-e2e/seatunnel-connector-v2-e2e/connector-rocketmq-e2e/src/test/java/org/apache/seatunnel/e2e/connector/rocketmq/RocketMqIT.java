@@ -594,8 +594,12 @@ public class RocketMqIT extends TestSuiteBase implements TestResource {
             type = {EngineType.SPARK, EngineType.FLINK},
             disabledReason = "Currently SPARK and FLINK do not support restore")
     public void testSourceRocketMqRestore(TestContainer container)
-            throws IOException, InterruptedException, MQBrokerException, RemotingException,
-                    MQClientException, ExecutionException {
+            throws IOException,
+                    InterruptedException,
+                    MQBrokerException,
+                    RemotingException,
+                    MQClientException,
+                    ExecutionException {
 
         final String sourceTopic = "test_topic_restore";
         final String sinkTopic = "test_topic_restore_output";

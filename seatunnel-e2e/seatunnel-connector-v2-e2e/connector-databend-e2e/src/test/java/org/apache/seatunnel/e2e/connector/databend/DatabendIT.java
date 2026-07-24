@@ -375,7 +375,9 @@ public class DatabendIT extends TestSuiteBase implements TestResource {
     }
 
     private void initConnection()
-            throws SQLException, ClassNotFoundException, InstantiationException,
+            throws SQLException,
+                    ClassNotFoundException,
+                    InstantiationException,
                     IllegalAccessException {
         final Properties info = new Properties();
         info.put("user", "root"); // Default Databend user

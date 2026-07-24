@@ -87,6 +87,7 @@ public abstract class AbstractWriteStrategy<T> implements WriteStrategy<T> {
     protected HadoopConf hadoopConf;
     protected HadoopFileSystemProxy hadoopFileSystemProxy;
     protected String transactionId;
+
     /** The uuid prefix to make sure same job different file sink will not conflict. */
     protected String uuidPrefix;
 

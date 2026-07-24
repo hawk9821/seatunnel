@@ -106,6 +106,7 @@ public class PhysicalPlanGenerator {
 
     /** Save the enumerator task ID corresponding to source */
     private final Map<SourceAction<?, ?, ?>, TaskLocation> enumeratorTaskIDMap = new HashMap<>();
+
     /** Save the committer task ID corresponding to sink */
     private final Map<SinkAction<?, ?, ?, ?>, TaskLocation> committerTaskIDMap = new HashMap<>();
 

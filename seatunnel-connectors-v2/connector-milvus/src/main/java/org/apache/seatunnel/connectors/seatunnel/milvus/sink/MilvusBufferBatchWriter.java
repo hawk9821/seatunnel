@@ -100,6 +100,7 @@ public class MilvusBufferBatchWriter {
 
         initMilvusClient(config);
     }
+
     /*
      * set up the Milvus client
      */

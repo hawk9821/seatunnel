@@ -308,7 +308,8 @@ public class FieldRenameTransform extends AbstractCatalogSupportMapTransform {
                                                                 ConstraintKey.of(
                                                                         key.getConstraintType(),
                                                                         key.getConstraintName(),
-                                                                        key.getColumnNames()
+                                                                        key
+                                                                                .getColumnNames()
                                                                                 .stream()
                                                                                 .map(
                                                                                         column ->

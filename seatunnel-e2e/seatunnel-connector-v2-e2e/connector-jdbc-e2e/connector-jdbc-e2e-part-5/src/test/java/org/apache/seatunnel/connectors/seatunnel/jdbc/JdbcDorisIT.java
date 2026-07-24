@@ -294,8 +294,11 @@ public class JdbcDorisIT extends TestSuiteBase implements TestResource {
     }
 
     private void initializeJdbcConnection()
-            throws SQLException, ClassNotFoundException, MalformedURLException,
-                    InstantiationException, IllegalAccessException {
+            throws SQLException,
+                    ClassNotFoundException,
+                    MalformedURLException,
+                    InstantiationException,
+                    IllegalAccessException {
         URLClassLoader urlClassLoader =
                 new URLClassLoader(
                         new URL[] {new URL(DRIVER_JAR)}, JdbcDorisIT.class.getClassLoader());

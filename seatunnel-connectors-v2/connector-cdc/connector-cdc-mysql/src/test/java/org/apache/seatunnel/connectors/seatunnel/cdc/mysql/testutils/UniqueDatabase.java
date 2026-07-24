@@ -128,7 +128,9 @@ public class UniqueDatabase {
         return this;
     }
 
-    /** @return Fully qualified table name <code>&lt;databaseName&gt;.&lt;tableName&gt;</code> */
+    /**
+     * @return Fully qualified table name <code>&lt;databaseName&gt;.&lt;tableName&gt;</code>
+     */
     public String qualifiedTableName(final String tableName) {
         return String.format("%s.%s", databaseName, tableName);
     }

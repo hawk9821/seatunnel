@@ -27,6 +27,7 @@ public final class SeaTunnelFactoryIdConstant {
      */
     public static final String SEATUNNEL_OPERATION_DATA_SERIALIZER_FACTORY =
             "hazelcast.serialization.ds.seatunnel.engine.operation";
+
     /** Default ID of SeaTunnelEngine's data serialization factory. */
     public static final int SEATUNNEL_OPERATION_DATA_SERIALIZER_FACTORY_ID = -30001;
 

@@ -37,7 +37,9 @@ import java.util.Map;
 
 import static org.apache.seatunnel.shade.com.google.common.base.Preconditions.checkNotNull;
 
-/** @deprecated instead by {@link MySqlTypeConverter} */
+/**
+ * @deprecated instead by {@link MySqlTypeConverter}
+ */
 @Deprecated
 @AutoService(DataTypeConvertor.class)
 public class MysqlDataTypeConvertor implements DataTypeConvertor<MysqlType> {

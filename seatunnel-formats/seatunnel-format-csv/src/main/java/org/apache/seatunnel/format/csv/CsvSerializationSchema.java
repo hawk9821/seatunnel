@@ -60,6 +60,7 @@ public class CsvSerializationSchema implements SerializationSchema {
     private final Charset charset;
     private final String nullValue;
     private final CsvStringQuoteMode quoteMode;
+
     /** When true, TIMESTAMP_TZ is serialized as wall-clock (no offset) for DB sinks like Doris. */
     private final boolean wallClockTimestampTz;
 

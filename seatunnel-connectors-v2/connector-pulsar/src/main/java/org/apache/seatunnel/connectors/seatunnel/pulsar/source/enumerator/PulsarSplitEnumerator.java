@@ -66,6 +66,7 @@ public class PulsarSplitEnumerator
     private final Object stateLock = new Object();
 
     private final Set<TopicPartition> assignedPartitions;
+
     /**
      * The discovered and initialized partition splits that are waiting for owner reader to be
      * ready.

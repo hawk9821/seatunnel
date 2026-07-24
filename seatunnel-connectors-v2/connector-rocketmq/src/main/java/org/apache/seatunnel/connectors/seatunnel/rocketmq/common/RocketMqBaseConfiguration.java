@@ -29,6 +29,7 @@ import java.util.Objects;
 public class RocketMqBaseConfiguration implements Serializable {
     private String namesrvAddr;
     private String groupId;
+
     /** set acl config */
     private boolean aclEnable;
 

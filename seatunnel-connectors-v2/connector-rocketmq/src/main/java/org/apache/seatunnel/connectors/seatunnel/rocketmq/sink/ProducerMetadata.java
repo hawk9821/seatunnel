@@ -29,15 +29,19 @@ import java.util.List;
 public class ProducerMetadata implements Serializable {
     /** basic config */
     private RocketMqBaseConfiguration configuration;
+
     /** send topic */
     private String topic;
+
     /** message tag */
     private String tag;
 
     /** partition key fields */
     private List<String> partitionKeyFields;
+
     /** RocketMq semantics */
     private boolean exactlyOnce;
+
     /** schema format */
     private SchemaFormat format;
 

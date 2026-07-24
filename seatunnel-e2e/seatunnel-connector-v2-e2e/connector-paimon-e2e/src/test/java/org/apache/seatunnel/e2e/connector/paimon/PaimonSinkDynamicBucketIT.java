@@ -312,7 +312,9 @@ public class PaimonSinkDynamicBucketIT extends TestSuiteBase implements TestReso
     @Disabled(
             "Spark and Flink engine can not auto create paimon table on worker node in local file, this e2e case work on hdfs environment, please set up your own HDFS environment in the test case file and the below setup")
     public void testPaimonBucketCountOnSparkAndFlink(TestContainer container)
-            throws IOException, InterruptedException, Catalog.TableNotExistException,
+            throws IOException,
+                    InterruptedException,
+                    Catalog.TableNotExistException,
                     Catalog.DatabaseNotExistException {
         PaimonSinkConfig paimonSinkConfig =
                 new PaimonSinkConfig(ReadonlyConfig.fromMap(PAIMON_SINK_PROPERTIES));

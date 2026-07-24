@@ -312,7 +312,7 @@ public class ArrowToSeatunnelRowReaderTest {
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
                 ArrowStreamWriter writer =
                         new ArrowStreamWriter(
-                                root, /*DictionaryProvider=*/ null, Channels.newChannel(out))) {
+                                root, /* DictionaryProvider= */ null, Channels.newChannel(out))) {
             writer.writeBatch();
             out.flush();
             List<SeaTunnelRow> rows = new ArrayList<>();
@@ -433,7 +433,7 @@ public class ArrowToSeatunnelRowReaderTest {
                 ArrowStreamWriter writer =
                         new ArrowStreamWriter(
                                 vectorSchemaRoot,
-                                /*DictionaryProvider=*/ null,
+                                /* DictionaryProvider= */ null,
                                 Channels.newChannel(out))) {
             stopwatch.stop();
             System.out.printf(

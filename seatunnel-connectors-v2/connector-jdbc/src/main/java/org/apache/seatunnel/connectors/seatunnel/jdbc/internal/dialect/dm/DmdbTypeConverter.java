@@ -58,8 +58,10 @@ public class DmdbTypeConverter implements TypeConverter<BasicTypeDefine> {
     public static final String DM_NUMERIC = "NUMERIC";
     public static final String DM_NUMBER = "NUMBER";
     public static final String DM_DECIMAL = "DECIMAL";
+
     /** same to DECIMAL */
     public static final String DM_DEC = "DEC";
+
     // -------------------------char------------------------
     public static final String DM_CHAR = "CHAR";
 
@@ -96,6 +98,7 @@ public class DmdbTypeConverter implements TypeConverter<BasicTypeDefine> {
     public static final int MAX_SCALE = MAX_PRECISION - 1;
     public static final int MAX_TIME_SCALE = 6;
     public static final int MAX_TIMESTAMP_SCALE = 6;
+
     /**
      * DM_CHAR DM_CHARACTER DM_VARCHAR DM_VARCHAR2 max logical length is 32767
      *

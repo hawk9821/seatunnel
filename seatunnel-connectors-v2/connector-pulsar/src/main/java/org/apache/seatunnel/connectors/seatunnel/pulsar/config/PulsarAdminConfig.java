@@ -42,6 +42,7 @@ public class PulsarAdminConfig extends BasePulsarConfig {
     public static final class Builder {
         /** Name of the authentication plugin. */
         private String authPluginClassName = "";
+
         /** Parameters for the authentication plugin. */
         private String authParams = "";
 

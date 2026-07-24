@@ -119,7 +119,7 @@ public class StarRocksDataTypeConvertor implements DataTypeConvertor<MysqlType> 
             case TIMESTAMP:
             case DATETIME:
                 return LocalTimeType.LOCAL_DATE_TIME_TYPE;
-                // TODO: to confirm
+            // TODO: to confirm
             case CHAR:
             case VARCHAR:
             case TINYTEXT:
@@ -144,7 +144,7 @@ public class StarRocksDataTypeConvertor implements DataTypeConvertor<MysqlType> 
                         MapUtils.getInteger(dataTypeProperties, PRECISION, DEFAULT_PRECISION);
                 Integer scale = MapUtils.getInteger(dataTypeProperties, SCALE, DEFAULT_SCALE);
                 return new DecimalType(precision, scale);
-                // TODO: support 'SET' & 'YEAR' type
+            // TODO: support 'SET' & 'YEAR' type
             default:
                 throw CommonError.convertToSeaTunnelTypeError(
                         "StarRocks", mysqlType.toString(), field);

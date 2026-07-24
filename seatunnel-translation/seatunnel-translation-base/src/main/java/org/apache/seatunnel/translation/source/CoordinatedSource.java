@@ -173,9 +173,7 @@ public class CoordinatedSource<T, SplitT extends SourceSplit, StateT extends Ser
 
     @Override
     public void run(Collector<T> collector) throws Exception {
-        readerMap
-                .entrySet()
-                .parallelStream()
+        readerMap.entrySet().parallelStream()
                 .forEach(
                         entry -> {
                             final AtomicBoolean flag = readerRunningMap.get(entry.getKey());
@@ -240,9 +238,7 @@ public class CoordinatedSource<T, SplitT extends SourceSplit, StateT extends Ser
     @Override
     public Map<Integer, List<byte[]>> snapshotState(long checkpointId) throws Exception {
         Map<Integer, List<byte[]>> allStates =
-                readerMap
-                        .entrySet()
-                        .parallelStream()
+                readerMap.entrySet().parallelStream()
                         .collect(
                                 Collectors.toMap(
                                         Map.Entry<Integer, SourceReader<T, SplitT>>::getKey,
@@ -274,9 +270,7 @@ public class CoordinatedSource<T, SplitT extends SourceSplit, StateT extends Ser
     @Override
     public void notifyCheckpointComplete(long checkpointId) throws Exception {
         splitEnumerator.notifyCheckpointComplete(checkpointId);
-        readerMap
-                .values()
-                .parallelStream()
+        readerMap.values().parallelStream()
                 .forEach(
                         reader -> {
                             try {
@@ -290,9 +284,7 @@ public class CoordinatedSource<T, SplitT extends SourceSplit, StateT extends Ser
     @Override
     public void notifyCheckpointAborted(long checkpointId) throws Exception {
         splitEnumerator.notifyCheckpointAborted(checkpointId);
-        readerMap
-                .values()
-                .parallelStream()
+        readerMap.values().parallelStream()
                 .forEach(
                         reader -> {
                             try {

@@ -80,7 +80,7 @@ public class LanceTypeMapper {
                 return BasicType.BYTE_TYPE;
             case "decimal128":
                 return new DecimalType(38, 10);
-                // TODO: struct|list|map
+            // TODO: struct|list|map
             default:
                 throw CommonError.convertToSeaTunnelTypeError("Lance", type.getType(), field);
         }

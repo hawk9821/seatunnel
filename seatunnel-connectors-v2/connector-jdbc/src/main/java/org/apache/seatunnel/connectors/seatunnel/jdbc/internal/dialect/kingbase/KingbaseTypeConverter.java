@@ -68,8 +68,8 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
 
             String kingbaseDataType = typeDefine.getDataType().toUpperCase();
             switch (kingbaseDataType) {
-                    // MySQL compatibility - only types not in PostgresTypeConverter
-                    // int not in PG (PG has SMALLINT/INTEGER/BIGINT)
+                // MySQL compatibility - only types not in PostgresTypeConverter
+                // int not in PG (PG has SMALLINT/INTEGER/BIGINT)
                 case MySqlTypeConverter.MYSQL_SMALLINT_UNSIGNED:
                 case MySqlTypeConverter.MYSQL_MEDIUMINT:
                 case MySqlTypeConverter.MYSQL_MEDIUMINT_UNSIGNED:
@@ -79,7 +79,7 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
                 case MySqlTypeConverter.MYSQL_YEAR_UNSIGNED:
                     builder.dataType(BasicType.INT_TYPE);
                     break;
-                    // DATETIME not in PG (PG has TIMESTAMP) — NTZ
+                // DATETIME not in PG (PG has TIMESTAMP) — NTZ
                 case MySqlTypeConverter.MYSQL_DATETIME:
                     builder.dataType(LocalTimeType.LOCAL_DATE_TIME_TYPE);
                     if (typeDefine.getScale() != null
@@ -97,7 +97,7 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
                         builder.scale(typeDefine.getScale());
                     }
                     break;
-                    // Binary types not in PG (PG has BYTEA)
+                // Binary types not in PG (PG has BYTEA)
                 case MySqlTypeConverter.MYSQL_BINARY:
                 case MySqlTypeConverter.MYSQL_VARBINARY:
                 case MySqlTypeConverter.MYSQL_TINYBLOB:
@@ -110,7 +110,7 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
                         builder.columnLength((long) (1024 * 1024 * 1024));
                     }
                     break;
-                    // Text types not in PG (PG has TEXT/VARCHAR/CHAR)
+                // Text types not in PG (PG has TEXT/VARCHAR/CHAR)
                 case MySqlTypeConverter.MYSQL_TINYTEXT:
                 case MySqlTypeConverter.MYSQL_MEDIUMTEXT:
                 case MySqlTypeConverter.MYSQL_LONGTEXT:
@@ -119,8 +119,8 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
                         builder.columnLength(typeDefine.getLength());
                     }
                     break;
-                    // Oracle compatibility - Oracle specific types (not in PostgresTypeConverter)
-                    // NUMBER is Oracle-specific numeric type
+                // Oracle compatibility - Oracle specific types (not in PostgresTypeConverter)
+                // NUMBER is Oracle-specific numeric type
                 case OracleTypeConverter.ORACLE_NUMBER:
                     DecimalType oracleDecimal =
                             new DecimalType(
@@ -132,14 +132,14 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
                     builder.columnLength((long) oracleDecimal.getPrecision());
                     builder.scale(oracleDecimal.getScale());
                     break;
-                    // FLOAT is different from PG FLOAT
+                // FLOAT is different from PG FLOAT
                 case OracleTypeConverter.ORACLE_FLOAT:
                     DecimalType floatDecimal = new DecimalType(DEFAULT_PRECISION, DEFAULT_SCALE);
                     builder.dataType(floatDecimal);
                     builder.columnLength((long) floatDecimal.getPrecision());
                     builder.scale(floatDecimal.getScale());
                     break;
-                    // Oracle string types (VARCHAR2, NVARCHAR2, NCHAR differ from PG)
+                // Oracle string types (VARCHAR2, NVARCHAR2, NCHAR differ from PG)
                 case OracleTypeConverter.ORACLE_VARCHAR2:
                 case OracleTypeConverter.ORACLE_NVARCHAR2:
                 case OracleTypeConverter.ORACLE_NCHAR:
@@ -155,12 +155,12 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
                         builder.columnLength((long) (1024 * 1024 * 1024));
                     }
                     break;
-                    // MySQL TIMESTAMP — LTZ (timezone-aware)
+                // MySQL TIMESTAMP — LTZ (timezone-aware)
                 case MySqlTypeConverter.MYSQL_TIMESTAMP:
                     builder.dataType(LocalTimeType.OFFSET_DATE_TIME_TYPE);
                     builder.scale(typeDefine.getScale());
                     break;
-                    // SQLServer compatibility - NTZ types
+                // SQLServer compatibility - NTZ types
                 case SqlServerTypeConverter.SQLSERVER_DATETIME2:
                 case SqlServerTypeConverter.SQLSERVER_SMALLDATETIME:
                     builder.dataType(LocalTimeType.LOCAL_DATE_TIME_TYPE);
@@ -179,7 +179,7 @@ public class KingbaseTypeConverter extends PostgresTypeConverter {
                         builder.scale(typeDefine.getScale());
                     }
                     break;
-                    // SQLServer DATETIMEOFFSET — LTZ (timezone-aware)
+                // SQLServer DATETIMEOFFSET — LTZ (timezone-aware)
                 case SqlServerTypeConverter.SQLSERVER_DATETIMEOFFSET:
                     builder.dataType(LocalTimeType.OFFSET_DATE_TIME_TYPE);
                     builder.scale(typeDefine.getScale());

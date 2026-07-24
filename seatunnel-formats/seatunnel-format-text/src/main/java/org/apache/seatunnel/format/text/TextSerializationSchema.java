@@ -52,6 +52,7 @@ public class TextSerializationSchema implements SerializationSchema {
     private final TimeUtils.Formatter timeFormatter;
     private final Charset charset;
     private final String nullValue;
+
     /** When true, TIMESTAMP_TZ is serialized as wall-clock (no offset) for DB sinks like Doris. */
     private final boolean wallClockTimestampTz;
 

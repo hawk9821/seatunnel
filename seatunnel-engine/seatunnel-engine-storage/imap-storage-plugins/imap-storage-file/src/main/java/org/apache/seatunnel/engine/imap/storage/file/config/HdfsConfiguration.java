@@ -37,6 +37,7 @@ public class HdfsConfiguration extends AbstractConfiguration {
 
     /** hdfs uri is required */
     private static final String HDFS_DEF_FS_NAME = "fs.defaultFS";
+
     /** hdfs kerberos principal( is optional) */
     private static final String KERBEROS_PRINCIPAL = "kerberosPrincipal";
 

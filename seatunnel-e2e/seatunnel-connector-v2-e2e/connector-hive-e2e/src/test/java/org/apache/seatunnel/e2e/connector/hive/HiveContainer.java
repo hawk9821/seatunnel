@@ -100,13 +100,17 @@ public class HiveContainer extends GenericContainer<HiveContainer> {
     }
 
     public Connection getConnection()
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+            throws ClassNotFoundException,
+                    InstantiationException,
+                    IllegalAccessException,
                     SQLException {
         return getConnection(false);
     }
 
     public Connection getConnection(boolean enableKerberos)
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+            throws ClassNotFoundException,
+                    InstantiationException,
+                    IllegalAccessException,
                     SQLException {
         Driver driver = loadHiveJdbcDriver();
         if (!enableKerberos) {

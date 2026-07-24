@@ -20,6 +20,7 @@ package org.apache.seatunnel.engine.server.dag.physical.config;
 public class IntermediateQueueConfig implements FlowConfig {
 
     private final long queueID;
+
     /** 0 means use default capacity decided by engine runtime. */
     private final int capacity;
 

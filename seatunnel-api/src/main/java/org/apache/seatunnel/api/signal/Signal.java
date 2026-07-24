@@ -41,12 +41,18 @@ import java.io.Serializable;
  */
 public interface Signal extends Serializable {
 
-    /** @return the id of the job that created this signal. */
+    /**
+     * @return the id of the job that created this signal.
+     */
     long getJobId();
 
-    /** @return the id of the task that created this signal. */
+    /**
+     * @return the id of the task that created this signal.
+     */
     long getTaskId();
 
-    /** @return the wall-clock creation time of this signal, in epoch milliseconds. */
+    /**
+     * @return the wall-clock creation time of this signal, in epoch milliseconds.
+     */
     long getCreatedTime();
 }

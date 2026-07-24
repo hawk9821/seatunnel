@@ -310,7 +310,9 @@ public class StarRocksCatalog implements Catalog {
         }
     }
 
-    /** @see com.mysql.cj.MysqlType */
+    /**
+     * @see com.mysql.cj.MysqlType
+     */
     private SeaTunnelDataType<?> fromJdbcType(ResultSetMetaData metadata, int colIndex)
             throws SQLException {
         MysqlType starrocksType = MysqlType.getByName(metadata.getColumnTypeName(colIndex));

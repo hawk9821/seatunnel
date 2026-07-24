@@ -281,7 +281,9 @@ public class HiveIT extends TestSuiteBase implements TestResource {
     }
 
     private void initializeConnection()
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+            throws ClassNotFoundException,
+                    InstantiationException,
+                    IllegalAccessException,
                     SQLException {
         this.hiveConnection = this.hiveServerContainer.getConnection();
     }

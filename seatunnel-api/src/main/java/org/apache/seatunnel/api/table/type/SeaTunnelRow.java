@@ -28,10 +28,13 @@ import java.util.Objects;
 public final class SeaTunnelRow implements Serializable {
     private static final long serialVersionUID = -1L;
     private static final String TRACE_PAYLOAD_OPTION_KEY = "__st_trace_payload";
+
     /** Table identifier. */
     private String tableId = "";
+
     /** The kind of change that a row describes in a changelog. */
     private RowKind rowKind = RowKind.INSERT;
+
     /** The array to store the actual internal format values. */
     private final Object[] fields;
 

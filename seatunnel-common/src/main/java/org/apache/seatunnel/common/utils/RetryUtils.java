@@ -91,8 +91,10 @@ public class RetryUtils {
          * greater than 0.
          */
         private final int retryTimes;
+
         /** If set true, the given execution will throw exception if it failed after retry. */
         private final boolean shouldThrowException;
+
         // this is the exception condition, can add result condition in the future.
         private final RetryCondition<Exception> retryCondition;
 

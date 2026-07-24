@@ -20,6 +20,7 @@ package org.apache.seatunnel.connectors.seatunnel.easysearch.dto.source;
 public class IndexDocsCount {
 
     private String index;
+
     /** index docs count */
     private Long docsCount;
 

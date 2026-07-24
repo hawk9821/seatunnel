@@ -38,6 +38,7 @@ import java.util.Map;
 /** Serializes records together with row metadata and stain trace payload options. */
 public class RecordSerializer implements StreamSerializer<Record> {
     private static final byte TYPE_CHECKPOINT_BARRIER = 0;
+
     /**
      * Legacy SeaTunnelRow record type.
      *

@@ -246,6 +246,7 @@ public class RabbitmqSourceTest {
                 () -> new RabbitmqSource(ReadonlyConfig.fromMap(configMap)),
                 "Should fail when table_configs is missing the schema block");
     }
+
     /**
      * Verifies that if a user configures BOTH 'schema' and 'tables_configs', the code fails-fast
      * instead of silently prioritizing one over the other.

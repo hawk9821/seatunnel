@@ -36,8 +36,10 @@ public class BigtableSourceSplit implements SourceSplit, Serializable {
     public static final String SPLIT_PREFIX = "bigtable_source_split_";
 
     private final String splitId;
+
     /** Inclusive start row key (empty means table start). */
     private final String startRowKey;
+
     /** Exclusive end row key (empty means table end). */
     private final String endRowKey;
 

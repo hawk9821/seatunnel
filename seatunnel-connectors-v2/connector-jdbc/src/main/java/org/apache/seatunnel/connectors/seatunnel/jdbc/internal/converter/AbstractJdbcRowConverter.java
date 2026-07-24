@@ -233,6 +233,7 @@ public abstract class AbstractJdbcRowConverter implements JdbcRowConverter {
         }
         return statement;
     }
+
     /**
      * Bind a null value to the PreparedStatement parameter.
      *

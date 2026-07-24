@@ -156,7 +156,8 @@ public class HiveKerberosIT extends SeaTunnelContainer {
                         "sh", "-c", "cd " + pluginHiveDir + " && wget " + hadoopCosUrl());
         Assertions.assertEquals(
                 0, downloadCosCommands.getExitCode(), downloadCosCommands.getStderr());
-    };
+    }
+    ;
 
     @BeforeEach
     @Override
@@ -264,7 +265,9 @@ public class HiveKerberosIT extends SeaTunnelContainer {
     }
 
     private void initializeConnection()
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+            throws ClassNotFoundException,
+                    InstantiationException,
+                    IllegalAccessException,
                     SQLException {
         this.hiveConnection = this.hiveServerContainer.getConnection(true);
     }

@@ -70,8 +70,7 @@ public class GoogleFirestoreIT extends TestSuiteBase implements TestResource {
     public void startUp() throws Exception {
         initFirestoreConfig();
         FirestoreOptions firestoreOptions =
-                FirestoreOptions.getDefaultInstance()
-                        .toBuilder()
+                FirestoreOptions.getDefaultInstance().toBuilder()
                         .setProjectId(projectId)
                         .setCredentials(
                                 GoogleCredentials.fromStream(

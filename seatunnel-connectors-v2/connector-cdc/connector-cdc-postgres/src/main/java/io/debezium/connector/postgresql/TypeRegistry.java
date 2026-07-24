@@ -223,52 +223,72 @@ public class TypeRegistry {
         return r;
     }
 
-    /** @return OID for {@code GEOMETRY} type of this PostgreSQL instance */
+    /**
+     * @return OID for {@code GEOMETRY} type of this PostgreSQL instance
+     */
     public int geometryOid() {
         return geometryOid;
     }
 
-    /** @return OID for {@code GEOGRAPHY} type of this PostgreSQL instance */
+    /**
+     * @return OID for {@code GEOGRAPHY} type of this PostgreSQL instance
+     */
     public int geographyOid() {
         return geographyOid;
     }
 
-    /** @return OID for {@code CITEXT} type of this PostgreSQL instance */
+    /**
+     * @return OID for {@code CITEXT} type of this PostgreSQL instance
+     */
     public int citextOid() {
         return citextOid;
     }
 
-    /** @return OID for {@code HSTORE} type of this PostgreSQL instance */
+    /**
+     * @return OID for {@code HSTORE} type of this PostgreSQL instance
+     */
     public int hstoreOid() {
         return hstoreOid;
     }
 
-    /** @return OID for {@code LTREE} type of this PostgreSQL instance */
+    /**
+     * @return OID for {@code LTREE} type of this PostgreSQL instance
+     */
     public int ltreeOid() {
         return ltreeOid;
     }
 
-    /** @return OID for array of {@code HSTORE} type of this PostgreSQL instance */
+    /**
+     * @return OID for array of {@code HSTORE} type of this PostgreSQL instance
+     */
     public int hstoreArrayOid() {
         return hstoreArrayOid;
     }
 
-    /** @return OID for array of {@code GEOMETRY} type of this PostgreSQL instance */
+    /**
+     * @return OID for array of {@code GEOMETRY} type of this PostgreSQL instance
+     */
     public int geometryArrayOid() {
         return geometryArrayOid;
     }
 
-    /** @return OID for array of {@code GEOGRAPHY} type of this PostgreSQL instance */
+    /**
+     * @return OID for array of {@code GEOGRAPHY} type of this PostgreSQL instance
+     */
     public int geographyArrayOid() {
         return geographyArrayOid;
     }
 
-    /** @return OID for array of {@code CITEXT} type of this PostgreSQL instance */
+    /**
+     * @return OID for array of {@code CITEXT} type of this PostgreSQL instance
+     */
     public int citextArrayOid() {
         return citextArrayOid;
     }
 
-    /** @return OID for array of {@code LTREE} type of this PostgreSQL instance */
+    /**
+     * @return OID for array of {@code LTREE} type of this PostgreSQL instance
+     */
     public int ltreeArrayOid() {
         return ltreeArrayOid;
     }

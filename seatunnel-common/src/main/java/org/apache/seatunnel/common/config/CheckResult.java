@@ -33,7 +33,9 @@ public class CheckResult {
         this.msg = msg;
     }
 
-    /** @return a successful instance of CheckResult */
+    /**
+     * @return a successful instance of CheckResult
+     */
     public static CheckResult success() {
         return SUCCESS;
     }

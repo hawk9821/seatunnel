@@ -36,7 +36,9 @@ import java.util.regex.Pattern;
 
 import static org.apache.seatunnel.shade.com.google.common.base.Preconditions.checkNotNull;
 
-/** @deprecated instead by {@link OracleTypeConverter} */
+/**
+ * @deprecated instead by {@link OracleTypeConverter}
+ */
 @Deprecated
 @AutoService(DataTypeConvertor.class)
 public class OracleDataTypeConvertor implements DataTypeConvertor<String> {

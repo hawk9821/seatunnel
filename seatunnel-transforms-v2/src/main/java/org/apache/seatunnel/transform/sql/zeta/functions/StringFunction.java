@@ -520,7 +520,7 @@ public class StringFunction {
                         if (ignoreGlobalFlag) {
                             break;
                         }
-                        // $FALL-THROUGH$
+                    // $FALL-THROUGH$
                     default:
                         Map<String, String> params = new HashMap<>();
                         params.put("argument", stringFlags);

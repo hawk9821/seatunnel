@@ -54,7 +54,8 @@ public class PaimonCatalogPrimaryTest {
 
     @BeforeEach
     public void before()
-            throws Catalog.DatabaseAlreadyExistException, Catalog.TableAlreadyExistException,
+            throws Catalog.DatabaseAlreadyExistException,
+                    Catalog.TableAlreadyExistException,
                     Catalog.DatabaseNotExistException {
         CatalogContext catalogContext = CatalogContext.create(new Path(WAREHOUSE_PATH));
         catalog = CatalogFactory.createCatalog(catalogContext);

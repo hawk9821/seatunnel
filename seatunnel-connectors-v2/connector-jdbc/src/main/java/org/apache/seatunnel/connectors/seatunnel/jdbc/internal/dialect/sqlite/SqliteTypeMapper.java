@@ -162,7 +162,7 @@ public class SqliteTypeMapper implements JdbcDialectTypeMapper {
             case SQLITE_LONGVARBINARY:
                 return PrimitiveByteArrayType.INSTANCE;
 
-                // Doesn't support yet
+            // Doesn't support yet
             case SQLITE_UNKNOWN:
             default:
                 final String jdbcColumnName = metadata.getColumnName(colIndex);

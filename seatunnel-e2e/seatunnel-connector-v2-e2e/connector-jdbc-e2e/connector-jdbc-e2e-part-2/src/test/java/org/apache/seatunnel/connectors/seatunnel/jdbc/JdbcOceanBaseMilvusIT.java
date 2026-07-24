@@ -162,7 +162,9 @@ public class JdbcOceanBaseMilvusIT extends TestSuiteBase implements TestResource
     }
 
     private void initMilvus()
-            throws SQLException, ClassNotFoundException, InstantiationException,
+            throws SQLException,
+                    ClassNotFoundException,
+                    InstantiationException,
                     IllegalAccessException {
         milvusClient =
                 new MilvusServiceClient(

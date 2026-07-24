@@ -32,7 +32,9 @@ public enum EdgeSocketPacketMode {
         this.value = value;
     }
 
-    /** @return canonical option value used in connector config */
+    /**
+     * @return canonical option value used in connector config
+     */
     public String getValue() {
         return value;
     }

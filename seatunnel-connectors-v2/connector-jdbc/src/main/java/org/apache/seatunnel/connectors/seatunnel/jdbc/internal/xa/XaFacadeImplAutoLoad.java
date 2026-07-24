@@ -348,7 +348,9 @@ public class XaFacadeImplAutoLoad implements XaFacade {
                 more == null || more.length == 0 ? "" : ". " + Arrays.toString(more));
     }
 
-    /** @return error description from {@link XAException} javadoc from to ease debug. */
+    /**
+     * @return error description from {@link XAException} javadoc from to ease debug.
+     */
     private static String descError(int code) {
         switch (code) {
             case XA_HEURCOM:

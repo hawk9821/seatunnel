@@ -162,7 +162,7 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
         String yashanType = typeDefine.getDataType().toUpperCase();
 
         switch (yashanType) {
-                // ====================== Integer types ======================
+            // ====================== Integer types ======================
             case TINYINT:
                 builder.dataType(BasicType.BYTE_TYPE);
                 break;
@@ -177,7 +177,7 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
                 builder.dataType(BasicType.LONG_TYPE);
                 break;
 
-                // ====================== NUMBER ======================
+            // ====================== NUMBER ======================
             case NUMBER:
                 DecimalType decimalType;
                 if (typeDefine.getPrecision() != null && typeDefine.getPrecision() > 0) {
@@ -192,7 +192,7 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
                 builder.scale(decimalType.getScale());
                 break;
 
-                // ====================== Floating-point types ======================
+            // ====================== Floating-point types ======================
             case FLOAT:
                 builder.dataType(BasicType.FLOAT_TYPE);
                 break;
@@ -200,17 +200,17 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
                 builder.dataType(BasicType.DOUBLE_TYPE);
                 break;
 
-                // ====================== Boolean type ======================
+            // ====================== Boolean type ======================
             case BOOLEAN:
                 builder.dataType(BasicType.BOOLEAN_TYPE);
                 break;
 
-                // ====================== BIT type ======================
+            // ====================== BIT type ======================
             case BIT:
                 builder.dataType(BasicType.LONG_TYPE);
                 break;
 
-                // ====================== Character types ======================
+            // ====================== Character types ======================
             case CHAR:
             case VARCHAR:
                 builder.dataType(BasicType.STRING_TYPE);
@@ -223,7 +223,7 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
                         TypeDefineUtils.doubleByteTo4ByteLength(typeDefine.getLength()));
                 break;
 
-                // ====================== ROWID types ======================
+            // ====================== ROWID types ======================
             case ROWID:
                 builder.dataType(BasicType.STRING_TYPE);
                 builder.columnLength(MAX_ROWID_LENGTH);
@@ -237,26 +237,26 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
                 }
                 break;
 
-                // ====================== XML types ======================
+            // ====================== XML types ======================
             case XMLTYPE:
                 builder.dataType(BasicType.STRING_TYPE);
                 builder.columnLength(typeDefine.getLength());
                 break;
 
-                // ====================== JSON type ======================
+            // ====================== JSON type ======================
             case JSON:
                 builder.dataType(BasicType.STRING_TYPE);
                 builder.columnLength((long) MAX_JSON_LENGTH);
                 break;
 
-                // ====================== LOB text types ======================
+            // ====================== LOB text types ======================
             case CLOB:
             case NCLOB:
                 builder.dataType(BasicType.STRING_TYPE);
                 builder.columnLength(BYTES_4GB - 1);
                 break;
 
-                // ====================== Binary / LOB types ======================
+            // ====================== Binary / LOB types ======================
             case BLOB:
                 builder.sourceType(BLOB);
                 builder.dataType(PrimitiveByteArrayType.INSTANCE);
@@ -271,7 +271,7 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
                 }
                 break;
 
-                // ====================== Date & Time types ======================
+            // ====================== Date & Time types ======================
             case DATE:
                 builder.dataType(LocalTimeType.LOCAL_DATE_TIME_TYPE);
                 break;
@@ -290,7 +290,7 @@ public class YashanDbTypeConverter implements TypeConverter<BasicTypeDefine> {
                 }
                 break;
 
-                // ====================== Interval types (as STRING) ======================
+            // ====================== Interval types (as STRING) ======================
             case INTERVAL_YEAR_TO_MONTH:
             case INTERVAL_DAY_TO_SECOND:
                 builder.dataType(BasicType.STRING_TYPE);

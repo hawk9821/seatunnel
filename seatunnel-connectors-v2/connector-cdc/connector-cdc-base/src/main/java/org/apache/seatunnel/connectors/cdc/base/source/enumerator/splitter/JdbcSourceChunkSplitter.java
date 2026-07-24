@@ -36,7 +36,9 @@ public interface JdbcSourceChunkSplitter extends ChunkSplitter {
     @Override
     Collection<SnapshotSplit> generateSplits(TableId tableId);
 
-    /** @deprecated instead by {@link this#queryMinMax(JdbcConnection, TableId, Column)} */
+    /**
+     * @deprecated instead by {@link this#queryMinMax(JdbcConnection, TableId, Column)}
+     */
     @Deprecated
     Object[] queryMinMax(JdbcConnection jdbc, TableId tableId, String columnName)
             throws SQLException;
@@ -55,7 +57,9 @@ public interface JdbcSourceChunkSplitter extends ChunkSplitter {
         return queryMinMax(jdbc, tableId, column.name());
     }
 
-    /** @deprecated instead by {@link this#queryMin(JdbcConnection, TableId, Column, Object)} */
+    /**
+     * @deprecated instead by {@link this#queryMin(JdbcConnection, TableId, Column, Object)}
+     */
     @Deprecated
     Object queryMin(
             JdbcConnection jdbc, TableId tableId, String columnName, Object excludedLowerBound)

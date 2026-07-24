@@ -34,7 +34,8 @@ public enum LanceConnectorErrorCode implements SeaTunnelErrorCode {
     LanceConnectorErrorCode(String code, String description) {
         this.code = code;
         this.description = description;
-    };
+    }
+    ;
 
     @Override
     public String getCode() {

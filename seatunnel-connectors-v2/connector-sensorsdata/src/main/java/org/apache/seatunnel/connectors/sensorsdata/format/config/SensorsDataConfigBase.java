@@ -48,6 +48,7 @@ public class SensorsDataConfigBase implements Serializable {
      * identityFields.
      */
     protected final boolean distinctIdByIdentities;
+
     /**
      * null user property as profile_unset (default false) If true, in seatunnel profile_set logic,
      * add process properties which value is null, send a profile_unset

@@ -72,9 +72,7 @@ public class HazelcastMetricsSnapshotStateStore
                     partitioned.computeIfAbsent(partition, k -> new HashMap<>()).put(key, value);
                 });
 
-        partitioned
-                .entrySet()
-                .parallelStream()
+        partitioned.entrySet().parallelStream()
                 .forEach(
                         entry -> {
                             metricsImap.compute(

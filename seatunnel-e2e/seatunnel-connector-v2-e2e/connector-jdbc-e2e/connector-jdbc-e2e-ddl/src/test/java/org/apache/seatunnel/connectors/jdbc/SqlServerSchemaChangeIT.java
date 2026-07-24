@@ -43,6 +43,7 @@ public class SqlServerSchemaChangeIT extends AbstractSchemaChangeBaseIT {
     private static final String SQLSERVER_USER = "sa";
     private static final String ACCEPT_EULA = "ACCEPT_EULA";
     private static final String Y = "Y";
+
     /**
      * Uses the supported SQL Server container password variable instead of deprecated SA_PASSWORD.
      */
@@ -50,26 +51,34 @@ public class SqlServerSchemaChangeIT extends AbstractSchemaChangeBaseIT {
 
     private static final String SQLSERVER_PASSWORD = "paanssy1234$";
     private static final int SQLSERVER_PORT = 1433;
+
     /** Exposes the RPC endpoint mapper required by SQL Server MSDTC inside containers. */
     private static final int SQLSERVER_RPC_PORT = 135;
+
     /** Exposes the MSDTC listener required by XA transactions in containerized SQL Server. */
     private static final int SQLSERVER_DTC_PORT = 51000;
+
     /** Executes real SQL Server login probes instead of relying on container logs alone. */
     private static final String SQLSERVER_COMMAND = "/opt/mssql-tools18/bin/sqlcmd";
+
     /** Gives SQL Server enough time to finish startup tasks before login and XA checks begin. */
     private static final Duration SQLSERVER_READY_TIMEOUT = Duration.ofMinutes(2);
+
     /** Exercises an authenticated query to prove the server is actually accepting connections. */
     private static final String SQLSERVER_READY_QUERY = "SET NOCOUNT ON; SELECT 1";
+
     /**
      * SQL Server 2022 can emit the client-ready log before recovery and `msdb` upgrades finish in
      * CI, so XA installation must wait for the stronger recovery-complete signal.
      */
     private static final String SQLSERVER_RECOVERY_COMPLETE_LOG = ".*Recovery is complete\\..*";
+
     /**
      * Verifies that the XA initialization procedure is visible before the exactly-once test runs.
      */
     private static final String SQLSERVER_XA_PROCEDURE_QUERY =
             "SET NOCOUNT ON; SELECT CASE WHEN OBJECT_ID('master..xp_sqljdbc_xa_init_ex') IS NOT NULL THEN 1 ELSE 0 END";
+
     /**
      * Newer SQL Server Linux containers do not always expose the external-user toggle. Guard the
      * setup statement so the XA bootstrap path stays compatible across image variants.

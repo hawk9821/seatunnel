@@ -40,6 +40,7 @@ public class FakeSourceSplitEnumerator
     private final Map<Integer, Set<FakeSourceSplit>> pendingSplits;
 
     private final MultipleTableFakeSourceConfig multipleTableFakeSourceConfig;
+
     /** Partitions that have been assigned to readers. */
     private final Set<FakeSourceSplit> assignedSplits;
 

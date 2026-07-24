@@ -298,7 +298,9 @@ public class SqlServerConnection extends JdbcConnection {
         return connection;
     }
 
-    /** @return the current largest log sequence number */
+    /**
+     * @return the current largest log sequence number
+     */
     public Lsn getMaxLsn(String databaseName) throws SQLException {
         return queryAndMap(
                 replaceDatabaseNamePlaceholder(GET_MAX_LSN, databaseName),
@@ -353,7 +355,9 @@ public class SqlServerConnection extends JdbcConnection {
                         "Nth LSN query must return exactly one value"));
     }
 
-    /** @return the log sequence number of the most recent transaction. */
+    /**
+     * @return the log sequence number of the most recent transaction.
+     */
     public Lsn getMaxTransactionLsn(String databaseName) throws SQLException {
         return queryAndMap(
                 replaceDatabaseNamePlaceholder(GET_MAX_TRANSACTION_LSN, databaseName),
@@ -366,7 +370,9 @@ public class SqlServerConnection extends JdbcConnection {
                         "Max transaction LSN query must return exactly one value"));
     }
 
-    /** @return the smallest log sequence number of table */
+    /**
+     * @return the smallest log sequence number of table
+     */
     public Lsn getMinLsn(String databaseName, String changeTableName) throws SQLException {
         String query =
                 replaceDatabaseNamePlaceholder(GET_MIN_LSN, databaseName)

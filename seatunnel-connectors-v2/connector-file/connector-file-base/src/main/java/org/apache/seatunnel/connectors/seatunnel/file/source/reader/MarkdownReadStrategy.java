@@ -86,6 +86,7 @@ public class MarkdownReadStrategy extends AbstractReadStrategy {
         BasicType.STRING_TYPE,
         BasicType.STRING_TYPE
     };
+
     /** Stable metadata fields appended for downstream RAG/document indexing pipelines. */
     private static final String[] RAG_METADATA_FIELD_NAMES = {
         "source_uri", "document_id", "chunk_id", "chunk_index", "content_hash"

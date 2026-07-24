@@ -19,7 +19,9 @@ package org.apache.seatunnel.format.csv.constant;
 
 import java.io.Serializable;
 
-/** @see org.apache.commons.csv.QuoteMode */
+/**
+ * @see org.apache.commons.csv.QuoteMode
+ */
 public enum CsvStringQuoteMode implements Serializable {
     /** Quotes all fields. */
     ALL,

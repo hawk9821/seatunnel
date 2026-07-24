@@ -26,12 +26,16 @@ import lombok.Data;
 public class RequestSlotOperationStats {
     /** Total request-slot invocations that returned an assigned slot. */
     private long successCount;
+
     /** Total request-slot invocations that completed but returned no slot. */
     private long noSlotCount;
+
     /** Total failed request-slot invocations. */
     private long failureCount;
+
     /** Most recent master-side request-slot invocation latency in milliseconds. */
     private long lastInvocationLatencyMs;
+
     /** Maximum observed master-side request-slot invocation latency in milliseconds. */
     private long maxInvocationLatencyMs;
 }

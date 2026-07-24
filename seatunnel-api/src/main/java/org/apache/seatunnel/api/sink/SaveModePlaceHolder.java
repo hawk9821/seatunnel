@@ -28,7 +28,9 @@ public enum SaveModePlaceHolder {
     TABLE("table", "table"),
     DATABASE("database", "database"),
     COMMENT("comment", "comment"),
-    /** @deprecated instead by {@link #TABLE} todo remove this enum */
+    /**
+     * @deprecated instead by {@link #TABLE} todo remove this enum
+     */
     @Deprecated
     TABLE_NAME("table_name", "table name");
 

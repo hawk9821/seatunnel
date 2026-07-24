@@ -102,8 +102,7 @@ public class IcebergScanContext {
 
     public static IcebergScanContext streamScanContext(
             IcebergSourceConfig sourceConfig, SourceTableConfig tableConfig, Schema schema) {
-        return scanContext(sourceConfig, tableConfig, schema)
-                .toBuilder()
+        return scanContext(sourceConfig, tableConfig, schema).toBuilder()
                 .streaming(true)
                 .streamScanStrategy(tableConfig.getStreamScanStrategy())
                 .build();

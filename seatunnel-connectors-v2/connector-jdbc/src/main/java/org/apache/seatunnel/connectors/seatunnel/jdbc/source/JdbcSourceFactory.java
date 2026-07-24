@@ -131,7 +131,8 @@ public class JdbcSourceFactory implements TableSourceFactory, SupportSourceDryRu
                         config.getJdbcConnectionConfig(),
                         config.getTableConfigList(),
                         config.getMultiTableFailurePolicy())
-                .values().stream()
+                .values()
+                .stream()
                 .map(JdbcSourceTable::getCatalogTable)
                 .collect(Collectors.toList());
     }
