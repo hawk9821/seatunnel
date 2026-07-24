@@ -450,7 +450,7 @@ jobs:
       - uses: ./.github/actions/setup-maven
       - name: run all modules unit test
         run: |
-          ./mvnw -B -T 1 clean verify -DskipUT=false -DskipIT=true -D"license.skipAddThirdParty"=true -D"skip.ui"=true --no-snapshot-updates --add-opens java.base/java.net=ALL-UNNAMED
+          ./mvnw -B -T 1 clean verify -DskipUT=false -DskipIT=true -D"license.skipAddThirdParty"=true -D"skip.ui"=true --no-snapshot-updates
         env:
           MAVEN_OPTS: -Xmx4096m ${{ env.JVM_OPTIONS }} -Dfile.encoding=UTF-8
 
@@ -729,7 +729,7 @@ jobs:
         run: tools/github/free_disk_space.sh
       - name: run seatunnel zeta integration test
         run: |
-          ./mvnw -T 1 -B verify -DskipUT=true -DskipIT=false -D"license.skipAddThirdParty"=true --no-snapshot-updates --add-opens java.base/java.net=ALL-UNNAMED -pl :connector-seatunnel-e2e-base,:connector-console-seatunnel-e2e -am -Pci
+          ./mvnw -T 1 -B verify -DskipUT=true -DskipIT=false -D"license.skipAddThirdParty"=true --no-snapshot-updates -pl :connector-seatunnel-e2e-base,:connector-console-seatunnel-e2e -am -Pci
         env:
           MAVEN_OPTS: -Xmx4096m ${{ env.JVM_OPTIONS }}
 
@@ -754,7 +754,7 @@ jobs:
         run: tools/github/free_disk_space.sh
       - name: run seatunnel edge agent integration test
         run: |
-          ./mvnw -T 1 -B verify -DskipUT=false -DskipIT=false -D"license.skipAddThirdParty"=true -D"skip.ui"=true --no-snapshot-updates --add-opens java.base/java.net=ALL-UNNAMED -pl :seatunnel-edge-agent-e2e -am -Pci
+          ./mvnw -T 1 -B verify -DskipUT=false -DskipIT=false -D"license.skipAddThirdParty"=true -D"skip.ui"=true --no-snapshot-updates -pl :seatunnel-edge-agent-e2e -am -Pci
         env:
           MAVEN_OPTS: -Xmx4096m ${{ env.JVM_OPTIONS }}
 
