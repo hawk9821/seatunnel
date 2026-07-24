@@ -22,3 +22,6 @@
 # JVM Dump
 -XX:+HeapDumpOnOutOfMemoryError
 -XX:HeapDumpPath=/tmp/seatunnel/dump/zeta-client
+
+# JDK 17+ Kerberos internal API access (for Kudu/Paimon Kerberos support)
+--add-opens java.base/sun.security.krb5=ALL-UNNAMED

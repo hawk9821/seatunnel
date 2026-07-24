@@ -20,6 +20,7 @@ package org.apache.seatunnel.connectors.seatunnel.kudu.util;
 import org.apache.seatunnel.shade.org.apache.commons.lang3.StringUtils;
 
 import org.apache.seatunnel.common.exception.CommonErrorCodeDeprecated;
+import org.apache.seatunnel.common.utils.ReflectionUtils;
 import org.apache.seatunnel.connectors.seatunnel.kudu.config.CommonConfig;
 import org.apache.seatunnel.connectors.seatunnel.kudu.config.KuduSourceConfig;
 import org.apache.seatunnel.connectors.seatunnel.kudu.config.KuduSourceTableConfig;
@@ -39,8 +40,6 @@ import org.apache.kudu.client.KuduScanToken;
 import org.apache.kudu.client.KuduTable;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.security.krb5.Config;
-import sun.security.krb5.KrbException;
 
 import java.io.IOException;
 import java.security.PrivilegedExceptionAction;
@@ -101,9 +100,13 @@ public class KuduUtil {
     private static void reloadKrb5conf(String krb5conf) {
         System.setProperty(KRB5_CONF_KEY, krb5conf);
         try {
-            Config.refresh();
-            KerberosName.resetDefaultRealm();
-        } catch (KrbException e) {
+            ReflectionUtils.invokeStatic(
+                    Class.forName("sun.security.krb5.Config"), "refresh");
+            ReflectionUtils.invokeStatic(
+                    Class.forName("sun.security.krb5.KerberosName"), "resetDefaultRealm");
+        } catch (ClassNotFoundException e) {
+            log.warn("Kerberos internal class not found, skip refresh.", e);
+        } catch (RuntimeException e) {
             log.warn(
                     "resetting default realm failed, current default realm will still be used.", e);
         }

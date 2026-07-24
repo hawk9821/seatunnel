@@ -24,6 +24,7 @@ import org.apache.seatunnel.connectors.seatunnel.paimon.config.PaimonConfig;
 import org.apache.seatunnel.connectors.seatunnel.paimon.config.PaimonHadoopConfiguration;
 import org.apache.seatunnel.connectors.seatunnel.paimon.exception.PaimonConnectorErrorCode;
 import org.apache.seatunnel.connectors.seatunnel.paimon.exception.PaimonConnectorException;
+import org.apache.seatunnel.common.utils.ReflectionUtils;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -34,8 +35,6 @@ import org.apache.paimon.security.SecurityConfiguration;
 import org.apache.paimon.security.SecurityContext;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.security.krb5.Config;
-import sun.security.krb5.KrbException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -141,9 +140,13 @@ public class PaimonSecurityContext extends SecurityContext {
     private static void reloadKrb5conf(String krb5conf) {
         System.setProperty(KRB5_CONF_KEY, krb5conf);
         try {
-            Config.refresh();
-            KerberosName.resetDefaultRealm();
-        } catch (KrbException e) {
+            ReflectionUtils.invokeStatic(
+                    Class.forName("sun.security.krb5.Config"), "refresh");
+            ReflectionUtils.invokeStatic(
+                    Class.forName("sun.security.krb5.KerberosName"), "resetDefaultRealm");
+        } catch (ClassNotFoundException e) {
+            log.warn("Kerberos internal class not found, skip refresh.", e);
+        } catch (RuntimeException e) {
             log.warn(
                     "resetting default realm failed, current default realm will still be used.", e);
         }

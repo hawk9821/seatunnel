@@ -28,3 +28,6 @@
 
 # G1GC
 -XX:+UseG1GC
+
+# JDK 17+ Kerberos internal API access (for Kudu/Paimon Kerberos support)
+--add-opens java.base/sun.security.krb5=ALL-UNNAMED

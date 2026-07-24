@@ -105,4 +105,30 @@ public class ReflectionUtils {
             throw new RuntimeException("method invoke failed", e);
         }
     }
+
+    public static Object invokeStatic(Class<?> clazz, String methodName, Object... args) {
+        Class<?>[] argTypes = new Class[args.length];
+        for (int i = 0; i < args.length; i++) {
+            argTypes[i] = args[i].getClass();
+        }
+        return invokeStatic(clazz, methodName, argTypes, args);
+    }
+
+    public static Object invokeStatic(
+            Class<?> clazz, String methodName, Class<?>[] argTypes, Object[] args) {
+        try {
+            Optional<Method> method = getDeclaredMethod(clazz, methodName, argTypes);
+            if (method.isPresent()) {
+                method.get().setAccessible(true);
+                return method.get().invoke(null, args);
+            } else {
+                throw new NoSuchMethodException(
+                        String.format(
+                                "static method invoke failed, no such method '%s' in '%s'",
+                                methodName, clazz));
+            }
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException("static method invoke failed", e);
+        }
+    }
 }

@@ -29,6 +29,9 @@
 # G1GC
 -XX:+UseG1GC
 
+# JDK 17+ Kerberos internal API access (for Kudu/Paimon Kerberos support)
+--add-opens java.base/sun.security.krb5=ALL-UNNAMED
+
 # GC Logging
 # Uncomment the following options to enable GC logging for troubleshooting and performance analysis.
 # The GC log directory will be automatically created on startup if it doesn't exist.
