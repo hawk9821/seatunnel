@@ -781,7 +781,8 @@
                             --add-opens java.base/java.nio=ALL-UNNAMED
                             --add-opens java.base/sun.nio.ch=ALL-UNNAMED
                             --add-opens java.base/java.lang.invoke=ALL-UNNAMED
-                            --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+                            --add-opens java.base/java.lang=ALL-UNNAMED
+                            --add-opens java.base/java.util=ALL-UNNAMED</argLine>
                         <systemPropertyVariables>
                             <jacoco-agent.destfile>${project.build.directory}/jacoco.exec</jacoco-agent.destfile>
                         </systemPropertyVariables>
@@ -826,7 +827,8 @@
                             --add-opens java.base/java.nio=ALL-UNNAMED
                             --add-opens java.base/sun.nio.ch=ALL-UNNAMED
                             --add-opens java.base/java.lang.invoke=ALL-UNNAMED
-                            --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+                            --add-opens java.base/java.lang=ALL-UNNAMED
+                            --add-opens java.base/java.util=ALL-UNNAMED</argLine>
                     </configuration>
                     <executions>
                         <execution>
