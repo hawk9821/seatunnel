@@ -782,7 +782,11 @@
                             --add-opens java.base/sun.nio.ch=ALL-UNNAMED
                             --add-opens java.base/java.lang.invoke=ALL-UNNAMED
                             --add-opens java.base/java.lang=ALL-UNNAMED
-                            --add-opens java.base/java.util=ALL-UNNAMED</argLine>
+                            --add-opens java.base/java.util=ALL-UNNAMED
+                            --add-opens java.base/java.util.concurrent=ALL-UNNAMED
+                            --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED
+                            --add-opens java.base/java.util.regex=ALL-UNNAMED
+                            --add-opens java.base/sun.security.util=ALL-UNNAMED</argLine>
                         <systemPropertyVariables>
                             <jacoco-agent.destfile>${project.build.directory}/jacoco.exec</jacoco-agent.destfile>
                         </systemPropertyVariables>
@@ -828,7 +832,11 @@
                             --add-opens java.base/sun.nio.ch=ALL-UNNAMED
                             --add-opens java.base/java.lang.invoke=ALL-UNNAMED
                             --add-opens java.base/java.lang=ALL-UNNAMED
-                            --add-opens java.base/java.util=ALL-UNNAMED</argLine>
+                            --add-opens java.base/java.util=ALL-UNNAMED
+                            --add-opens java.base/java.util.concurrent=ALL-UNNAMED
+                            --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED
+                            --add-opens java.base/java.util.regex=ALL-UNNAMED
+                            --add-opens java.base/sun.security.util=ALL-UNNAMED</argLine>
                     </configuration>
                     <executions>
                         <execution>
