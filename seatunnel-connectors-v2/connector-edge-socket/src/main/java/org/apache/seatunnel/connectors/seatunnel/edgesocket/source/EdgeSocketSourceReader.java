@@ -223,8 +223,42 @@ public class EdgeSocketSourceReader extends AbstractSingleSplitReader<SeaTunnelR
     private boolean isDecryptionError(EdgeSocketConnectorException exception) {
         EdgeSocketConnectorErrorCode errorCode =
                 (EdgeSocketConnectorErrorCode) exception.getSeaTunnelErrorCode();
-        return errorCode == EdgeSocketConnectorErrorCode.PACKET_AES_KEY_MISSING
-                || (errorCode == EdgeSocketConnectorErrorCode.PACKET_DECODE_ERROR
-                        && exception.getCause() instanceof java.security.GeneralSecurityException);
+        if (errorCode == EdgeSocketConnectorErrorCode.PACKET_AES_KEY_MISSING) {
+            return true;
+        }
+        if (errorCode != EdgeSocketConnectorErrorCode.PACKET_DECODE_ERROR) {
+            return false;
+        }
+        Throwable cause = exception.getCause();
+        // JDK 8/11 path: Cipher throws GeneralSecurityException subclasses such as
+        // AEADBadTagException or BadPaddingException.
+        if (cause instanceof java.security.GeneralSecurityException) {
+            return true;
+        }
+        // JDK 17+ path: Cipher may throw ProviderException wrapping a
+        // ShortBufferException when the ciphertext is too short for the configured
+        // GCM tag length. Treat this as a decryption failure as well.
+        while (cause != null) {
+            if (cause instanceof java.security.ProviderException
+                    && hasCauseOfType(
+                            cause, new Class[] {javax.crypto.ShortBufferException.class})) {
+                return true;
+            }
+            cause = cause.getCause();
+        }
+        return false;
+    }
+
+    private static boolean hasCauseOfType(Throwable throwable, Class<?>[] types) {
+        Throwable cause = throwable.getCause();
+        while (cause != null) {
+            for (Class<?> type : types) {
+                if (type.isInstance(cause)) {
+                    return true;
+                }
+            }
+            cause = cause.getCause();
+        }
+        return false;
     }
 }
